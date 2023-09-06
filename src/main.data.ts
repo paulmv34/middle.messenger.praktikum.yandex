@@ -278,7 +278,7 @@ const RegistrationPageContext = {
     fields: [
         {
             label: 'Почта',
-            name: 'mail',
+            name: 'email',
             type: 'text',
             placeholder: 'Почта',
             value: 'ivanivanov@yandex',
@@ -302,7 +302,7 @@ const RegistrationPageContext = {
         },
         {
             label: 'Фамилия',
-            name: 'secon',
+            name: 'second_name',
             type: 'text',
             placeholder: 'Фамилия',
             value: 'Иванов',
@@ -419,6 +419,14 @@ const ProfilePageContext = {
             error: '',
         },
         {
+            label: 'Имя в чате',
+            name: 'display_name',
+            type: 'text',
+            placeholder: 'Введите имя в чате',
+            value: 'Иван',
+            error: '',
+        },
+        {
             label: 'Имя',
             name: 'first_name',
             type: 'text',
@@ -480,6 +488,15 @@ const ProfileEditPageContext = {
             type: 'text',
             placeholder: 'Введите логин',
             value: '',
+            error: '',
+            edit: true,
+        },
+        {
+            label: 'Имя в чате',
+            name: 'display_name',
+            type: 'text',
+            placeholder: 'Введите имя в чате',
+            value: 'Иван',
             error: '',
             edit: true,
         },
