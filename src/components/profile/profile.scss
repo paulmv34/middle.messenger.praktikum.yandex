@@ -1,0 +1,9 @@
+@import "/src/style/include";
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: stretch;
+    justify-content: flex-start;
+}

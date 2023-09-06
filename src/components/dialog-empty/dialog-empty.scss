@@ -1,0 +1,10 @@
+@import "/src/style/include";
+
+.dialog-empty {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 125%;
+    color: $cGray;
+    padding: 5px 20px;
+    text-align: center;
+}

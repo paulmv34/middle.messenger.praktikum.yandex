@@ -1,0 +1,10 @@
+@import "/src/style/include";
+
+.form {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    gap: 30px;
+}

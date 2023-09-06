@@ -1,0 +1,11 @@
+<div class="form-field">
+    <div class="form-field__label{{#unless field.value}} form-field__label_empty{{/unless}}">{{field.label}}</div>
+    <input
+            class="form-field__input{{#if field.error}} form-field__input_error{{else}}{{#unless field.value}} form-field__input_empty{{/unless}}{{/if}}"
+            name="{{field.name}}"
+            type="{{field.type}}"
+            placeholder="{{field.placeholder}}"
+            value="{{field.value}}"
+    >
+    <div class="form-field__error">{{field.error}}</div>
+</div>

@@ -1,0 +1,9 @@
+<div class="profile-buttons">
+    {{#each buttons}}
+        {{#if this.button}}
+            {{> Button name=this.name page=this.page label=this.label}}
+        {{else}}
+            {{> ButtonLink name=this.name page=this.page label=this.label}}
+        {{/if}}
+    {{/each}}
+</div>

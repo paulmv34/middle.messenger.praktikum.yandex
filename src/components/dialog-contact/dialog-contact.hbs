@@ -1,0 +1,16 @@
+<div class="dialog-contact">
+    <div class="dialog-contact__avatar">
+        {{> MessageAvatar src=contact.avatar alt=contact.username online=contact.online}}
+    </div>
+    <div class="dialog-contact__info">
+        <div class="dialog-contact__name">
+            {{contact.username}}
+        </div>
+        <div class="dialog-contact__status {{#if contact.online}} dialog-contact__status_online{{/if}}">
+            {{contact.status}}
+        </div>
+    </div>
+    <div class="dialog-contact__actions">
+        {{> ButtonIcon type='more' page='404'}}
+    </div>
+</div>

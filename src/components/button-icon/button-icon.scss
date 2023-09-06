@@ -1,0 +1,49 @@
+@import "/src/style/include";
+
+.button-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &_menu {
+        background: url('button-icon_menu.svg') no-repeat center transparent;
+        &:hover {
+            background-color: $cGrayHover;
+        }
+    }
+    &_more {
+        background: url('button-icon_more.svg') no-repeat center transparent;
+        &:hover {
+            background-color: $cGrayHover;
+        }
+    }
+    &_attach {
+        width: 48px;
+        height: 48px;
+        background: url('button-icon_attach.svg') no-repeat center transparent;
+        &:hover {
+            background-color: $cGrayHover;
+        }
+    }
+    &_send {
+        width: 48px;
+        height: 48px;
+        background: url('button-icon_send.svg') no-repeat center $cBlue;
+        &:hover {
+            background-color: $cBlueHover;
+        }
+    }
+    &_back {
+        width: 48px;
+        height: 48px;
+        background: url('button-icon_back.svg') no-repeat center $cBlue;
+        &:hover {
+            background-color: $cBlueHover;
+        }
+    }
+}

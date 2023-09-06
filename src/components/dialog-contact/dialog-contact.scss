@@ -1,0 +1,42 @@
+@import "/src/style/include";
+
+.dialog-contact {
+    display: flex;
+    padding: 5px 20px 5px 30px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid $cGrayStroke;
+    height: 68px;
+    flex-shrink: 0;
+    background: $cWhite;
+    &__avatar {
+        width: 48px;
+        flex-shrink: 0;
+    }
+    &__info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+    &__name {
+        color: $cBlack;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.25;
+    }
+    &__status {
+        color: $cGray;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 1.25;
+        &_online {
+            color: $cBlue;
+        }
+    }
+    &__actions {
+        margin-left: auto;
+        display: flex;
+        flex-shrink: 0;
+    }
+}

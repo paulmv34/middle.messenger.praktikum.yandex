@@ -1,0 +1,63 @@
+@import "/src/style/include";
+
+.contacts-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+    &:hover,
+    &_current {
+        background-color: $cBlue15;
+        &:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            border-right: 2px solid $cBlue;
+        }
+    }
+    &__avatar {
+        flex-shrink: 0;
+    }
+    &__body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        overflow: hidden;
+    }
+    &__info {
+        display: flex;
+        gap: 10px;
+        overflow: hidden;
+    }
+    &__author {
+        flex-grow: 1;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    &__message {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 12px;
+        line-height: 1.25em;
+        & b {
+            color: $cBlack;
+        }
+    }
+    &__text {
+        height: 2.5em;
+        flex-grow: 1;
+        color: $cDarkGray;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+}

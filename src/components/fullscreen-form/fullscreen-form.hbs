@@ -1,0 +1,14 @@
+<div class="fullscreen-form">
+    {{#if back}}
+        <div class="fullscreen-form__back" data-page='{{back}}'>
+            {{> ButtonIcon type='back' page=back}}
+        </div>
+    {{/if}}
+    <div class="fullscreen-form__frame">
+        <div class="fullscreen-form__scroll">
+            <div class="fullscreen-form__form {{#if narrow}} fullscreen-form__form_narrow{{/if}}">
+                {{> @partial-block }}
+            </div>
+        </div>
+    </div>
+</div>

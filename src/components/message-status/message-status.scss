@@ -1,0 +1,32 @@
+@import "/src/style/include";
+
+.message-status {
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    min-height: 20px;
+    gap: 5px;
+    &__date {
+        color: $cGray;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 125%;
+    }
+    &__status {
+        width: 20px;
+        height: 20px;
+        background: none no-repeat center / contain;
+        &_send {
+            color: $cGray;
+            background-image: url('message-status__status_send.svg');
+        }
+        &_received {
+            color: $cGray;
+            background-image: url('message-status__status_received.svg');
+        }
+        &_read {
+            color: $cBlue;
+            background-image: url('message-status__status_read.svg');
+        }
+    }
+}

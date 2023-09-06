@@ -1,0 +1,11 @@
+@import "/src/style/include";
+
+.dialog {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+    justify-content: center;
+}
