@@ -294,7 +294,7 @@ const RegistrationPageContext = {
         },
         {
             label: 'Имя',
-            name: 'password',
+            name: 'first_name',
             type: 'text',
             placeholder: 'Имя',
             value: 'Иван',
@@ -302,7 +302,7 @@ const RegistrationPageContext = {
         },
         {
             label: 'Фамилия',
-            name: 'password',
+            name: 'secon',
             type: 'text',
             placeholder: 'Фамилия',
             value: 'Иванов',
@@ -326,7 +326,7 @@ const RegistrationPageContext = {
         },
         {
             label: 'Пароль (еще раз)',
-            name: 'password_repeat',
+            name: 'passwordRepeat',
             type: 'password',
             placeholder: 'Пароль (еще раз)',
             value: 'неслучайныйпароль',
