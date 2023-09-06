@@ -19,7 +19,7 @@
 
 ## Стенд
 
-
+https://shimmering-tanuki-f14bd9.netlify.app/
 
 ## Макет
 
