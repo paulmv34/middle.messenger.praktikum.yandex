@@ -1,0 +1,5 @@
+<div class="message-avatar{{#if online}} message-avatar_online{{/if}}{{#unless src}} message-avatar_empty{{/unless}}">
+    {{#if src}}
+        <img class="message-avatar__img" src="{{src}}" alt="{{alt}}">
+    {{/if}}
+</div>

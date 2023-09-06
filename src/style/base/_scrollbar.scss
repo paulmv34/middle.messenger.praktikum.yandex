@@ -1,0 +1,23 @@
+.scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: $cGray $cLightGrayBg;
+    &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $cLightGrayBg;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $cGray;
+        border-radius: 4px;
+    }
+    &_wide {
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+    }
+}

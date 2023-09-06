@@ -1,0 +1,46 @@
+@import "/src/style/include";
+
+.form-field {
+    position: relative;
+    padding: 14px 0;
+    &__label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 400;
+        color: $cGray;
+        &_empty {
+            display: none;
+        }
+    }
+    &__input {
+        display: block;
+        width: 100%;
+        padding: 5px 0;
+        border: 0;
+        border-bottom: 1px solid $cBlue;
+        font-size: 16px;
+        line-height: 1.25;
+        font-weight: 400;
+        &_error {
+            border-bottom: 1px solid $cRed;
+        }
+        &_empty {
+            border-bottom: 1px solid $cGray;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    &__error {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: $cRed;
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 400;
+    }
+}

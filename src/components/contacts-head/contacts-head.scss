@@ -1,0 +1,12 @@
+@import "/src/style/include";
+
+.contacts-head {
+    display: flex;
+    padding: 5px 20px;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid $cGrayStroke;
+    height: 68px;
+    flex-shrink: 0;
+}

@@ -1,0 +1,11 @@
+<div class="dialog-list scrollbar scrollbar_wide">
+    {{#each list}}
+        <div class="dialog-list__row">
+            {{#if this.date}}
+                {{> DialogDate date=this.date}}
+            {{else}}
+                {{> DialogMessage message=this.message}}
+            {{/if}}
+        </div>
+    {{/each}}
+</div>

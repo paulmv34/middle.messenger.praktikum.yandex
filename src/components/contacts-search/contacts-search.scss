@@ -1,0 +1,21 @@
+@import "/src/style/include";
+
+.contacts-search {
+    flex-grow: 1;
+    &__field {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background: $cWhite; 
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 1.25;
+        color: $cBlack;
+        outline: none;
+        border: none;
+        &::placeholder {
+            color: $cGray;;
+        }
+    }
+}
