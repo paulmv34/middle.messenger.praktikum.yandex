@@ -1,2 +1,2 @@
 import './form-buttons.scss'
-export { default as FormButtons } from './form-buttons.hbs?raw';
+export { default as FormButtons } from './form-buttons.ts';

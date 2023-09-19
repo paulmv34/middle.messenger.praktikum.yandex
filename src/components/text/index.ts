@@ -1,2 +1,2 @@
 import './text.scss'
-export { default as Text } from './text.hbs?raw';
+export { default as Text } from './text.ts';
