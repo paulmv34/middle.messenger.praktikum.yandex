@@ -1,12 +1,12 @@
 {{#>Page}}
     {{#>FullscreenForm}}
-        {{>Caption text=caption}}
+        {{{Caption text=caption}}}
         {{#if avatar}}
-            {{>ProfileAvatar src=avatar.src alt=avatar.username}}
+            {{{ProfileAvatar src=avatar.src alt=avatar.username}}}
         {{/if}}
-        {{#>Profile}}
-            {{>ProfileFieldset fields=fields}}
-            {{>ProfileButtons buttons=buttons}}
+        {{#Profile}}
+            {{{ProfileFieldset fields=fields}}}
+            {{{ProfileButtons buttons=buttons}}}
         {{/Profile}}
     {{/FullscreenForm}}
 {{/Page}}

@@ -1,19 +1,11 @@
 import Block from "../../core/Block";
-import template from './button.hbs?raw';
+import template from './page.hbs?raw';
 
-interface IProps {
-    label: string,
-    name: string,
-    page: string,
-    onClick: () => void
-}
+interface IProps { }
 
-export default class Button extends Block {
+export default class Page extends Block {
     constructor(props: IProps) {
         super(props);
-        this.props.events = {
-            click: this.props.onClick || (() => {})
-        }
     }
 
     protected render(): DocumentFragment {

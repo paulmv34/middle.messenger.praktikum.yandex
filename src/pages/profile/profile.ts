@@ -1,9 +1,16 @@
 import Block from "../../core/Block";
-import template from './dialog.hbs?raw';
+import template from './profile.hbs?raw';
 
-interface IProps extends IDialog { }
+interface IProps {
+    title: string,
+    caption: string,
+    back: string,
+    avatar: {src: string, username: string},
+    fields: string,
+    buttons: string,
+}
 
-export default class Dialog extends Block {
+export default class ProfilePage extends Block {
     constructor(props: IProps) {
         super(props);
         this.props.events = {

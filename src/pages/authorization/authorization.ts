@@ -1,11 +1,14 @@
 import Block from "../../core/Block";
-import template from './contacts-search.hbs?raw';
+import template from './authorization.hbs?raw';
 
 interface IProps {
-    search: string,
+    title: string,
+    caption: string,
+    fields: IField[],
+    buttons: IButton[],
 }
 
-export default class ContactsSearch extends Block {
+export default class AuthorizationPage extends Block {
     constructor(props: IProps) {
         super(props);
     }

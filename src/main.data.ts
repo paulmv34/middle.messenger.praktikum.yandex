@@ -1,7 +1,7 @@
 import avatarUrl from './assets/images/avatar.jpg'
 import imageUrl from './assets/images/image.jpg'
-
-const DemoContacts: ContactsListItem[] = [
+// TODO mocks
+const DemoContacts: IContactsListItem[] = [
     {
         current: false,
         avatar: '',
@@ -172,69 +172,63 @@ const DemoContacts: ContactsListItem[] = [
     },
 ];
 
-const DemoContactsActive: ContactsListItem[] = [];
+const DemoContactsActive: IContactsListItem[] = [];
 DemoContacts.forEach(val => DemoContactsActive.push(Object.assign({}, val)));
 DemoContactsActive[1].current = true;
 DemoContactsActive[1].online = true;
 
-const DemoMessages = [
+const DemoMessages: IDialogMessage[] = [
     {
-        date: '25 августа'
+        owner: true,
+        avatar: '',
+        username: 'User Name',
+        message:  `
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec ligula ipsum. Nunc sapien lacus, luctus a tortor id, congue ultricies ligula. Vivamus porttitor elit ut turpis iaculis, eget pretium elit dapibus. Nam pulvinar dignissim posuere. Quisque vitae mi sit amet risus consequat ornare. 
+            <br><br>
+            Mauris pretium sapien tincidunt neque ornare ullamcorper. Sed a vulputate erat. Ut id turpis tempor, molestie enim sed, mollis dolor. Integer non sagittis lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+        `,
+        image: '',
+        status: 'read',
+        date: 1692976324,
+        showDateLabel: true,
     },
     {
-        message: {
-            owner: true,
-            avatar: '',
-            username: 'User Name',
-            message:  `
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec ligula ipsum. Nunc sapien lacus, luctus a tortor id, congue ultricies ligula. Vivamus porttitor elit ut turpis iaculis, eget pretium elit dapibus. Nam pulvinar dignissim posuere. Quisque vitae mi sit amet risus consequat ornare. 
-                <br><br>
-                Mauris pretium sapien tincidunt neque ornare ullamcorper. Sed a vulputate erat. Ut id turpis tempor, molestie enim sed, mollis dolor. Integer non sagittis lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-            `,
-            image: false,
-            status: 'read',
-            date: '18:12'
-        }
+        owner: true,
+        avatar: '',
+        username: 'User Name',
+        message:  `
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec ligula ipsum. Nunc sapien lacus, luctus a tortor id, congue ultricies ligula. Vivamus porttitor elit ut turpis iaculis, eget pretium elit dapibus. Nam pulvinar dignissim posuere. Quisque vitae mi sit amet risus consequat ornare. 
+            <br><br>
+            Mauris pretium sapien tincidunt neque ornare ullamcorper. Sed a vulputate erat. Ut id turpis tempor, molestie enim sed, mollis dolor. Integer non sagittis lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+        `,
+        image: imageUrl,
+        status: 'read',
+        date: 1692976324,
+        showDateLabel: false,
     },
     {
-        message: {
-            owner: true,
-            avatar: '',
-            username: 'User Name',
-            message: '',
-            image:  imageUrl,
-            status: 'read',
-            date: '18:12'
-        }
+        owner: false,
+        avatar: avatarUrl,
+        username: 'User Name',
+        message:  `
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec ligula ipsum. Nunc sapien lacus, luctus a tortor id, congue ultricies ligula. Vivamus porttitor elit ut turpis iaculis, eget pretium elit dapibus. Nam pulvinar dignissim posuere. Quisque vitae mi sit amet risus consequat ornare. 
+            <br><br>
+            Mauris pretium sapien tincidunt neque ornare ullamcorper. Sed a vulputate erat. Ut id turpis tempor, molestie enim sed, mollis dolor. Integer non sagittis lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+        `,
+        image: '',
+        status: 'read',
+        date: 1693062724,
+        showDateLabel: true,
     },
     {
-        date: '26 августа'
-    },
-    {
-        message: {
-            owner: false,
-            avatar: avatarUrl,
-            username: 'User Name',
-            message:  `
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec ligula ipsum. Nunc sapien lacus, luctus a tortor id, congue ultricies ligula. Vivamus porttitor elit ut turpis iaculis, eget pretium elit dapibus. Nam pulvinar dignissim posuere. Quisque vitae mi sit amet risus consequat ornare. 
-                <br><br>
-                Mauris pretium sapien tincidunt neque ornare ullamcorper. Sed a vulputate erat. Ut id turpis tempor, molestie enim sed, mollis dolor. Integer non sagittis lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-            `,
-            image: false,
-            status: '',
-            date: '18:12'
-        }
-    },
-    {
-        message: {
-            owner: false,
-            avatar: avatarUrl,
-            username: 'User Name',
-            message: '',
-            image:  imageUrl,
-            status: '',
-            date: '18:12'
-        }
+        owner: false,
+        avatar: avatarUrl,
+        username: 'User Name',
+        message: '',
+        image:  imageUrl,
+        status: 'read',
+        date: 1693062724,
+        showDateLabel: false,
     },
 ];
 

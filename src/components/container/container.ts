@@ -1,9 +1,9 @@
 import Block from "../../core/Block";
-import template from './form-field.hbs?raw';
+import template from './container.hbs?raw';
 
-interface IProps extends IField { }
+interface IProps { }
 
-export default class FormField extends Block {
+export default class Container extends Block {
     constructor(props: IProps) {
         super(props);
     }

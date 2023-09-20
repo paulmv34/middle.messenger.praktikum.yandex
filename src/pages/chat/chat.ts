@@ -1,9 +1,13 @@
 import Block from "../../core/Block";
-import template from './form-field.hbs?raw';
+import template from './chat.hbs?raw';
 
-interface IProps extends IField { }
+interface IProps {
+    title: string,
+    contacts: IContacts,
+    dialog: IDialog,
+}
 
-export default class FormField extends Block {
+export default class ChatPage extends Block {
     constructor(props: IProps) {
         super(props);
     }

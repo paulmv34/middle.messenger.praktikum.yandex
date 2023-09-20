@@ -7,10 +7,10 @@ export function registerComponent(name: string, Component: typeof Block) {
     throw `The ${name} component is already registered!`;
   }
 
+  // TODO это все хорошо, но @partial-block при таком подходе к сожалению выходит из чата...
   Handlebars.registerHelper(name, function (this: unknown, {hash, data, fn}: HelperOptions) {
     const component = new Component(hash);
     const dataAttribute = `data-id="${component.id}"`;
-
     if ('ref' in hash) {
       (data.root.__refs = data.root.__refs || {})[hash.ref] = component;
     }
@@ -23,6 +23,9 @@ export function registerComponent(name: string, Component: typeof Block) {
         if (!stub) {
           return;
         }
+        console.log(component.getContent());
+        console.log(stub);
+        debugger;
 
         component.getContent()?.append(...Array.from(stub.childNodes));
 

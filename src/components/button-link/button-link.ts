@@ -1,13 +1,7 @@
 import Block from "../../core/Block";
 import template from './button-link.hbs?raw';
 
-interface IProps {
-    label: string,
-    color?: 'red',
-    name: string,
-    page: string,
-    onClick: () => void
-}
+interface IProps extends IButton {}
 
 export default class ButtonLink extends Block {
     constructor(props: IProps) {

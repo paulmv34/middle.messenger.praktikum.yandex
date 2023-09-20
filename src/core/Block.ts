@@ -131,15 +131,14 @@ class Block {
     this._addEvents();
   }
 
-  protected makeHbsTemplate(template: string): ((context: unknown) => string) {
-    return Handlebars.template(Handlebars.precompile(template));
-  }
-
   protected compile(templateString: string, context: any) {
+    console.log(this.constructor.name);
     const contextAndStubs = {...context, __refs: this.refs};
-    const template = this.makeHbsTemplate(templateString);
+    const template = Handlebars.compile(templateString);
   
     const html = template(contextAndStubs);
+    console.log(this.constructor.name);
+    debugger;
 
     const temp = document.createElement('template');
 
@@ -157,6 +156,7 @@ class Block {
   }
 
   getContent() {
+    // TODO partial
     return this.element;
   }
 

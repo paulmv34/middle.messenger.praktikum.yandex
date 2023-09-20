@@ -1,14 +1,9 @@
 import Block from "../../core/Block";
-import template from './button.hbs?raw';
+import template from './contacts-item.hbs?raw';
 
-interface IProps {
-    label: string,
-    name: string,
-    page: string,
-    onClick: () => void
-}
+interface IProps extends IContactsListItem { }
 
-export default class Button extends Block {
+export default class ContactsItem extends Block {
     constructor(props: IProps) {
         super(props);
         this.props.events = {

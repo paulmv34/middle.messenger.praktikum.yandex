@@ -1,9 +1,9 @@
 <div class="dialog">
     {{#if dialog}}
-        {{> DialogContact contact=dialog.contact}}
-        {{> DialogList list=dialog.messages}}
-        {{> DialogForm message=dialog.message}}
+        {{{ DialogContact contact=contact}}}
+        {{{ DialogList messages=messages}}}
+        {{{ DialogForm form=form}}}
     {{else}}
-        {{> DialogEmpty}}
+        {{{ DialogEmpty}}}
     {{/if}}
 </div>

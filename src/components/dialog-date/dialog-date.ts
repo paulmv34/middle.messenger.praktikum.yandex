@@ -1,14 +1,11 @@
 import Block from "../../core/Block";
-import template from './button.hbs?raw';
+import template from './dialog-date.hbs?raw';
 
 interface IProps {
-    label: string,
-    name: string,
-    page: string,
-    onClick: () => void
+    date: number,
 }
 
-export default class Button extends Block {
+export default class DialogDate extends Block {
     constructor(props: IProps) {
         super(props);
         this.props.events = {

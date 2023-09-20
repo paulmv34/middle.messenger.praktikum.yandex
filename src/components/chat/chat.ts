@@ -1,11 +1,7 @@
 import Block from "../../core/Block";
 import template from './chat.hbs?raw';
 
-// TODO
-interface IProps {
-    contacts: object,
-    dialog: object,
-}
+interface IProps extends IChat {}
 
 export default class Chat extends Block {
     constructor(props: IProps) {

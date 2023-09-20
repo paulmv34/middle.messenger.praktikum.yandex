@@ -1,9 +1,15 @@
 import Block from "../../core/Block";
-import template from './dialog.hbs?raw';
+import template from './error.hbs?raw';
 
-interface IProps extends IDialog { }
+interface IProps {
+    title: string,
+    caption: string,
+    text: string,
+    back: string,
+    button: IButton,
+}
 
-export default class Dialog extends Block {
+export default class ErrorPage extends Block {
     constructor(props: IProps) {
         super(props);
         this.props.events = {

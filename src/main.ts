@@ -1,7 +1,9 @@
 import './style/main.scss'
-import './main.types';
-import Handlebars from 'handlebars';
+import './types/main.types';
+import Block from "./core/Block";
+//import Handlebars from 'handlebars';
 import * as Components from './components';
+import {registerComponent} from './core/registerComponent';
 import * as Pages from './pages';
 import * as Contexts from './main.data';
 
@@ -18,16 +20,29 @@ const pages:{[key: string]: Object[]} = {
 };
 
 Object.entries(Components).forEach(([ name, component ]) => {
-    Handlebars.registerPartial(name, <Handlebars.TemplateDelegate<any> | string>component);
+    registerComponent(name, component);
+    //Handlebars.registerPartial(name, <Handlebars.TemplateDelegate<any> | string>component);
 });
 
+/*
+Object.entries(Pages).forEach(([ name, component ]) => {
+    registerComponent(name, component);
+});
+*/
+
 function navigate(page: PageTypes) {
-    const [ source, context ]: [any, Context] = pages[page] as [any, Context];
+    const [ PageComponent, context ]: [Block, IContext] = pages[page] as [Block, IContext];
     const container = document.getElementById('app');
     if (context.hasOwnProperty('title'))
         document.title = <string>context.title;
-    if (container)
-        container.innerHTML = Handlebars.compile(source)(context);
+    //@ts-ignore
+    let pageComponent = new PageComponent(context);
+    if (container) {
+        if (container.childNodes.length > 0)
+            container.replaceChildren(pageComponent.getContent());
+        else
+            container.append(pageComponent.getContent());
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => navigate('authorization'));

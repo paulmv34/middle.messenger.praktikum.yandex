@@ -1,11 +1,11 @@
 <div class="contacts-item{{#if contact.current}} contacts-item_current{{/if}}" data-page="{{contact.page}}">
     <div class="contacts-item__avatar">
-        {{> MessageAvatar src=contact.avatar alt=contact.username online=contact.online}}
+        {{{ MessageAvatar src=contact.avatar alt=contact.username online=contact.online}}}
     </div>
     <div class="contacts-item__body">
         <div class="contacts-item__info">
             <div class="contacts-item__author">{{contact.username}}</div>
-            {{> MessageStatus date=contact.date status=contact.status}}
+            {{{ MessageStatus date=contact.date status=contact.status}}}
         </div>
         <div class="contacts-item__message">
             <div class="contacts-item__text">
@@ -15,7 +15,7 @@
                 {{contact.message}}
             </div>
             {{#if contact.count}}
-                {{> MessageCounter count=contact.count}}
+                {{{ MessageCounter count=contact.count}}}
             {{/if}}
         </div>
     </div>

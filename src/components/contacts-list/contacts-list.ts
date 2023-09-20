@@ -1,19 +1,13 @@
 import Block from "../../core/Block";
-import template from './button.hbs?raw';
+import template from './contacts-list.hbs?raw';
 
 interface IProps {
-    label: string,
-    name: string,
-    page: string,
-    onClick: () => void
+    list: IContactsListItem[]
 }
 
-export default class Button extends Block {
+export default class ContactsList extends Block {
     constructor(props: IProps) {
         super(props);
-        this.props.events = {
-            click: this.props.onClick || (() => {})
-        }
     }
 
     protected render(): DocumentFragment {

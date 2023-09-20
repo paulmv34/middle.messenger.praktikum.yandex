@@ -1,14 +1,11 @@
 import Block from "../../core/Block";
-import template from './button.hbs?raw';
+import template from './form-fieldset.hbs?raw';
 
 interface IProps {
-    label: string,
-    name: string,
-    page: string,
-    onClick: () => void
+    fields: IField[]
 }
 
-export default class Button extends Block {
+export default class FormFieldset extends Block {
     constructor(props: IProps) {
         super(props);
         this.props.events = {

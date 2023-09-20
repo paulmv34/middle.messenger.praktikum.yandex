@@ -1,12 +1,7 @@
 import Block from "../../core/Block";
 import template from './button-icon.hbs?raw';
 
-interface IProps {
-    type: "menu" | "more" | "attach" | "send" | "back",
-    name: string,
-    page: string,
-    onClick: () => void
-}
+interface IProps extends IButton {}
 
 export default class ButtonIcon extends Block {
     constructor(props: IProps) {

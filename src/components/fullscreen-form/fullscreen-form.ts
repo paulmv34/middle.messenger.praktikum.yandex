@@ -1,14 +1,15 @@
 import Block from "../../core/Block";
-import template from './button.hbs?raw';
+import template from './fullscreen-form.hbs?raw';
 
 interface IProps {
-    label: string,
-    name: string,
-    page: string,
-    onClick: () => void
+    back: string,
+    narrow: boolean,
+    caption?: string,
+    fields?: IField[],
+    buttons?: IButton[],
 }
 
-export default class Button extends Block {
+export default class FullscreenForm extends Block {
     constructor(props: IProps) {
         super(props);
         this.props.events = {

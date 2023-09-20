@@ -1,19 +1,13 @@
 import Block from "../../core/Block";
-import template from './button.hbs?raw';
+import template from './message-counter.hbs?raw';
 
 interface IProps {
-    label: string,
-    name: string,
-    page: string,
-    onClick: () => void
+    count: number,
 }
 
-export default class Button extends Block {
+export default class MessageCounter extends Block {
     constructor(props: IProps) {
         super(props);
-        this.props.events = {
-            click: this.props.onClick || (() => {})
-        }
     }
 
     protected render(): DocumentFragment {
