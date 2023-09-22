@@ -11,9 +11,9 @@
         line-height: 14px;
         font-weight: 400;
         color: $cGray;
-        &_empty {
-            display: none;
-        }
+    }
+    &__input_empty + &__label {
+        display: none;
     }
     &__input {
         display: block;

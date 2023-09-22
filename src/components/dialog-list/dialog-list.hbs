@@ -1,7 +1,5 @@
 <div class="dialog-list scrollbar scrollbar_wide">
-    {{#each list}}
-        <div class="dialog-list__row">
-            {{{ DialogMessage message=this}}}
-        </div>
+    {{#each messages}}
+        {{{ DialogMessage message=this}}}
     {{/each}}
 </div>

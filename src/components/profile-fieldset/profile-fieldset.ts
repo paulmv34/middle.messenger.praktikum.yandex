@@ -8,9 +8,6 @@ interface IProps {
 export default class ProfileFieldset extends Block {
     constructor(props: IProps) {
         super(props);
-        this.props.events = {
-            click: this.props.onClick || (() => {})
-        }
     }
 
     protected render(): DocumentFragment {

@@ -1,3 +1,18 @@
 {{#Page}}
-    {{{FullscreenForm narrow="true" caption=caption fields=fields buttons=buttons}}}
+    {{#FullscreenForm narrow="true"}}
+        {{{Caption text=caption}}}
+        {{#if errorText}}
+            {{{Text align='center' text=errorText error='true'}}}
+        {{/if}}
+        {{#Form}}
+            {{#FormFieldset}}
+                {{{FormField field=loginField ref='login'}}}
+                {{{FormField field=passwordField ref='password'}}}
+            {{/FormFieldset}}
+            {{#FormButtons}}
+                {{{Button name=loginButton.name page=loginButton.page label=loginButton.label onClick=onSubmit}}}
+                {{{ButtonLink name=registerButton.name page=registerButton.page label=registerButton.label}}}
+            {{/FormButtons}}
+        {{/Form}}
+    {{/FullscreenForm}}
 {{/Page}}

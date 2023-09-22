@@ -1,9 +1,10 @@
 import EventBus from "./EventBus";
 import {nanoid} from 'nanoid';
 import Handlebars from "handlebars";
+import {type} from "os";
 
 // Нельзя создавать экземпляр данного класса
-class Block {
+export default class Block {
   static EVENTS = {
     INIT: "init",
     FLOW_CDM: "flow:component-did-mount",
@@ -12,18 +13,15 @@ class Block {
   };
 
   public id = nanoid(6);
-  protected props: any;
+  protected props: Record<string, unknown>;
   protected refs: Record<string, Block> = {};
-  public children: Record<string, Block>;
+  protected children: Record<string, Block>;
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
+  private _eventTarget: HTMLElement | null = null;
+  private _partial: HTMLElement | null = null;
   private _meta: { props: any; };
 
-  /** JSDoc
-   * @param {Object} propsWithChildren
-   *
-   * @returns {void}
-   */
   constructor(propsWithChildren: any = {}) {
     const eventBus = new EventBus();
 
@@ -58,14 +56,6 @@ class Block {
     return {props, children};
   }
 
-  _addEvents() {
-    const {events = {}} = this.props as { events: Record<string, () => void> };
-
-    Object.keys(events).forEach(eventName => {
-      this._element?.addEventListener(eventName, events[eventName]);
-    });
-  }
-
   _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -86,8 +76,9 @@ class Block {
     this.componentDidMount();
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
+
+  componentWillMount() {}
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -103,9 +94,48 @@ class Block {
 
   protected componentDidUpdate(oldProps: any, newProps: any) {
     return true;
+    //return oldProps && newProps ? true : true;
   }
 
-  setProps = (nextProps: any) => {
+  protected unmountComponent() {
+    if (this._element) {
+      this._componentWillUnmount();
+      this._removeEvents();
+      for (const child of Object.values(this.children).reverse()) child.unmountComponent();
+    }
+  }
+
+  private mountComponent() {
+    this.componentWillMount();
+    this._addEvents();
+    this._componentDidMount();
+  }
+
+  private _addEvents() {
+    const {events = {}} = this.props as { events: Record<string, () => void> };
+
+    Object.keys(events).forEach(eventName => {
+      if (typeof(events[eventName]) == 'function')
+        this.eventTarget?.addEventListener(eventName, events[eventName]);
+    });
+  }
+
+  private _componentWillUnmount() {
+    this.componentWillUnmount();
+  }
+
+  protected componentWillUnmount() {}
+
+  private _removeEvents() {
+    const {events = {}} = this.props;
+
+    for (const eventName of Object.keys(events)) {
+      if (typeof(events[eventName]) == 'function')
+        this.eventTarget?.removeEventListener(eventName, events[eventName]);
+    }
+  }
+
+  public setProps = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
@@ -113,11 +143,25 @@ class Block {
     Object.assign(this.props, nextProps);
   };
 
+  get content() {
+    return this._partial ? this._partial : this._element;
+  }
+
   get element() {
     return this._element;
   }
 
+  get eventTarget() {
+    return this._eventTarget ? this._eventTarget : this._element;
+  }
+
+  set eventTarget(eventTarget) {
+    this._eventTarget = eventTarget;
+  }
+
   private _render() {
+    this.unmountComponent();
+
     const fragment = this.render();
 
     const newElement = fragment?.firstElementChild as HTMLElement;
@@ -128,20 +172,19 @@ class Block {
 
     this._element = newElement;
 
-    this._addEvents();
+    const newPartial = newElement.querySelector(`[data-partial-block="${this.id}"]`);
+    if (newPartial && newPartial instanceof HTMLElement) {
+      this._partial = newPartial;
+    }
+
+    this.mountComponent();
   }
 
   protected compile(templateString: string, context: any) {
-    console.log(this.constructor.name);
     const contextAndStubs = {...context, __refs: this.refs};
-    const template = Handlebars.compile(templateString);
-  
+    const template = Handlebars.compile(this.makePartialBlockContainer(templateString));
     const html = template(contextAndStubs);
-    console.log(this.constructor.name);
-    debugger;
-
     const temp = document.createElement('template');
-
     temp.innerHTML = html;
 
     contextAndStubs.__children?.forEach(({embed}: any) => {
@@ -151,52 +194,64 @@ class Block {
     return temp.content;
   }
 
+  protected makePartialBlockContainer(templateString: string): string {
+    return templateString.replace('{{> @partial-block }}', `<div data-partial-block="${this.id}"></div>`);
+  }
+
   protected render(): DocumentFragment  | null {
     return null;
   }
 
   getContent() {
-    // TODO partial
+    return this.content;
+  }
+
+  getElement() {
     return this.element;
   }
 
   _makePropsProxy(props: any) {
-    // Ещё один способ передачи this, но он больше не применяется с приходом ES6+
-    const self = this;
-
     return new Proxy(props, {
-      get(target, prop) {
+      get: (target, prop) => {
         const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
-      set(target, prop, value) {
+      set: (target, prop, value) =>  {
         const oldTarget = {...target}
-
         target[prop] = value;
 
         // Запускаем обновление компоненты
         // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },
-      deleteProperty() {
+      deleteProperty: () => {
         throw new Error("Нет доступа");
       }
     });
   }
 
-  _createDocumentElement(tagName: string) {
-    // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
+  public validate(value: string = ''): boolean {
+    return this.validateChildren();
+  }
+
+  public validateChildren(): boolean {
+    return Object.values(this.refs).reduce((isValid, ref) => ref.validate() && isValid, true);
+  }
+
+  public value(): object {
+    return this.valueChildren();
+  }
+
+  public valueChildren(): object {
+    return Object.values(this.refs).reduce((values, ref) => Object.assign(values, ref.value()), {});
   }
 
   show() {
-    this.getContent()!.style.display = "block";
+    this.getElement()!.style.display = "block";
   }
 
   hide() {
-    this.getContent()!.style.display = "none";
+    this.getElement()!.style.display = "none";
   }
 }
-
-export default Block;

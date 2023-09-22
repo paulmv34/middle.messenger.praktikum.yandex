@@ -12,9 +12,6 @@ interface IProps {
 export default class FullscreenForm extends Block {
     constructor(props: IProps) {
         super(props);
-        this.props.events = {
-            click: this.props.onClick || (() => {})
-        }
     }
 
     protected render(): DocumentFragment {

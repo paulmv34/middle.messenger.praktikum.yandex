@@ -1,3 +1,15 @@
 {{#Page}}
-    {{{FullscreenForm narrow="true" caption=caption fields=fields buttons=buttons}}}
+    {{#FullscreenForm narrow="true"}}
+        {{#if caption}}
+            {{{Caption text=caption}}}
+        {{/if}}
+        {{#Form}}
+            {{#if fields}}
+                {{{FormFieldset fields=fields}}}
+            {{/if}}
+            {{#if buttons}}
+                {{{FormButtons buttons=buttons}}}
+            {{/if}}
+        {{/Form}}
+    {{/FullscreenForm}}
 {{/Page}}

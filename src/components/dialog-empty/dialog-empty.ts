@@ -6,9 +6,6 @@ interface IProps { }
 export default class DialogEmpty extends Block {
     constructor(props: IProps) {
         super(props);
-        this.props.events = {
-            click: this.props.onClick || (() => {})
-        }
     }
 
     protected render(): DocumentFragment {

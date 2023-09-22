@@ -7,17 +7,7 @@
     <div class="fullscreen-form__frame">
         <div class="fullscreen-form__scroll">
             <div class="fullscreen-form__form {{#if narrow}} fullscreen-form__form_narrow{{/if}}">
-                {{#if caption}}
-                    {{{Caption text=caption}}}
-                {{/if}}
-                {{#Form}}
-                    {{#if fields}}
-                        {{{FormFieldset fields=fields}}}
-                    {{/if}}
-                    {{#if buttons}}
-                        {{{FormButtons buttons=buttons}}}
-                    {{/if}}
-                {{/Form}}
+                {{> @partial-block }}
             </div>
         </div>
     </div>

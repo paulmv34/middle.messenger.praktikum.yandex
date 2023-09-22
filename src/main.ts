@@ -39,9 +39,9 @@ function navigate(page: PageTypes) {
     let pageComponent = new PageComponent(context);
     if (container) {
         if (container.childNodes.length > 0)
-            container.replaceChildren(pageComponent.getContent());
+            container.replaceChildren(pageComponent.getElement());
         else
-            container.append(pageComponent.getContent());
+            container.append(pageComponent.getElement());
     }
 }
 

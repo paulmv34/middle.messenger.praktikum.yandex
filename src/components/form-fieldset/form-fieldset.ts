@@ -8,8 +8,9 @@ interface IProps {
 export default class FormFieldset extends Block {
     constructor(props: IProps) {
         super(props);
+
         this.props.events = {
-            click: this.props.onClick || (() => {})
+            blur: this.props.onBlur || (() => {})
         }
     }
 

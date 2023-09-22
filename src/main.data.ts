@@ -8,7 +8,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Андрей',
         online: false,
         status: '',
-        date: '23.08.2023',
+        date: 1693062724,
         label: '',
         message: `Перезвони мне`,
         count: 2,
@@ -20,7 +20,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Вадим Вадимович Вадимов',
         online: false,
         status: 'read',
-        date: '23.08.2023',
+        date: 1693062724,
         label: 'Вы',
         message: `Стикер`,
         count: 0,
@@ -32,7 +32,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Иванов Иван Иванович',
         online: true,
         status: 'received',
-        date: '23.08.2023',
+        date: 1693062724,
         label: `Вы`,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -44,7 +44,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Антон',
         online: false,
         status: '',
-        date: '23.08.2023',
+        date: 1693062724,
         label: ``,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 99,
@@ -56,7 +56,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: 'read',
-        date: '23.08.2023',
+        date: 1693062724,
         label: `Вы`,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -68,7 +68,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: '',
-        date: '23.08.2023',
+        date: 1693062724,
         label: ``,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 99,
@@ -80,7 +80,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: 'read',
-        date: '23.08.2023',
+        date: 1693062724,
         label: `Вы`,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -92,7 +92,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: '',
-        date: '23.08.2023',
+        date: 1693062724,
         label: ``,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -104,7 +104,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: 'read',
-        date: '23.08.2023',
+        date: 1693062724,
         label: `Вы`,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -116,7 +116,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: '',
-        date: '23.08.2023',
+        date: 1693062724,
         label: ``,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -128,7 +128,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: 'read',
-        date: '23.08.2023',
+        date: 1693062724,
         label: `Вы`,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -140,7 +140,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: '',
-        date: '23.08.2023',
+        date: 1693062724,
         label: ``,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 99,
@@ -152,7 +152,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: 'read',
-        date: '23.08.2023',
+        date: 1693062724,
         label: `Вы`,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -164,7 +164,7 @@ const DemoContacts: IContactsListItem[] = [
         username: 'Александр Александрович Александров',
         online: false,
         status: '',
-        date: '23.08.2023',
+        date: 1693062724,
         label: ``,
         message: `Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк`,
         count: 0,
@@ -196,11 +196,7 @@ const DemoMessages: IDialogMessage[] = [
         owner: true,
         avatar: '',
         username: 'User Name',
-        message:  `
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec ligula ipsum. Nunc sapien lacus, luctus a tortor id, congue ultricies ligula. Vivamus porttitor elit ut turpis iaculis, eget pretium elit dapibus. Nam pulvinar dignissim posuere. Quisque vitae mi sit amet risus consequat ornare. 
-            <br><br>
-            Mauris pretium sapien tincidunt neque ornare ullamcorper. Sed a vulputate erat. Ut id turpis tempor, molestie enim sed, mollis dolor. Integer non sagittis lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-        `,
+        message:  ``,
         image: imageUrl,
         status: 'read',
         date: 1692976324,
@@ -235,35 +231,40 @@ const DemoMessages: IDialogMessage[] = [
 const AuthorizationPageContext = {
     title: 'Вход - Чатограм',
     caption: 'Вход',
-    fields: [
-        {
-            label: 'Логин',
-            name: 'login',
-            type: 'text',
-            placeholder: 'Логин',
-            value: '',
-            error: '',
-        },
-        {
-            label: 'Пароль',
-            name: 'password',
-            type: 'password',
-            placeholder: 'Пароль',
-            value: '',
-            error: '',
-        }
-    ],
-    buttons: [
-        {
-            button: true,
-            page: 'empty-chat',
-            label: 'Войти',
-        },
-        {
-            page: 'registration',
-            label: 'Зарегистрироваться',
-        },
-    ]
+    errorText: '',
+    loginField: {
+        label: 'Логин',
+        name: 'login',
+        type: 'text',
+        placeholder: 'Логин',
+        value: '',
+        error: '',
+        onBlur: (e) => {},
+        validator: 'login',
+        required: true,
+    },
+    passwordField: {
+        label: 'Пароль',
+        name: 'password',
+        type: 'password',
+        placeholder: 'Пароль',
+        value: '',
+        error: '',
+        onBlur: (e) => {},
+        validator: 'password',
+        required: true,
+    },
+    loginButton: {
+        name: 'submit',
+        page: 'empty-chat',
+        label: 'Войти',
+    },
+    registerButton: {
+        name: 'register',
+        page: 'registration',
+        label: 'Зарегистрироваться',
+    },
+    onSubmit: () => {}
 };
 
 const RegistrationPageContext = {
@@ -277,6 +278,7 @@ const RegistrationPageContext = {
             placeholder: 'Почта',
             value: 'ivanivanov@yandex',
             error: 'Некорректный формат',
+            validator: 'mail'
         },
         {
             label: 'Логин',
@@ -285,6 +287,7 @@ const RegistrationPageContext = {
             placeholder: 'Логин',
             value: '',
             error: '',
+            login: 'mail'
         },
         {
             label: 'Имя',
@@ -293,6 +296,7 @@ const RegistrationPageContext = {
             placeholder: 'Имя',
             value: 'Иван',
             error: '',
+            validator: 'name'
         },
         {
             label: 'Фамилия',
@@ -301,6 +305,7 @@ const RegistrationPageContext = {
             placeholder: 'Фамилия',
             value: 'Иванов',
             error: '',
+            validator: 'name'
         },
         {
             label: 'Телефон',
@@ -309,6 +314,7 @@ const RegistrationPageContext = {
             placeholder: 'Телефон',
             value: '',
             error: '',
+            validator: 'phone'
         },
         {
             label: 'Пароль',
@@ -317,6 +323,7 @@ const RegistrationPageContext = {
             placeholder: 'Пароль',
             value: 'неслучайныйпароль',
             error: '',
+            validator: 'password'
         },
         {
             label: 'Пароль (еще раз)',
@@ -325,6 +332,7 @@ const RegistrationPageContext = {
             placeholder: 'Пароль (еще раз)',
             value: 'неслучайныйпароль',
             error: '',
+            validator: 'password'
         }
     ],
     buttons: [

@@ -2,6 +2,10 @@ type PageTypes = "authorization" | "registration" | "404" | "500" | "empty-chat"
 
 type MessageStatuses = "send" | "received" | "read";
 
+interface NodeEvent<T = HTMLElement> extends Event {
+    target: EventTarget & T;
+}
+
 interface IContext {
     title?: string;
 }
@@ -22,7 +26,7 @@ interface IContactsListItem {
     username: string,
     online: boolean,
     status: string,
-    date: string,
+    date: number,
     label: string,
     message: string,
     count: number,
@@ -54,8 +58,10 @@ interface IDialogMessage {
     message: string,
     image: string,
     status: MessageStatuses,
+    displayedStatus?: MessageStatuses | undefined,
     showDateLabel: boolean,
     date: number,
+    dateLabel?: string,
 }
 
 interface IButton {
@@ -65,7 +71,7 @@ interface IButton {
     label?: string,
     type?: string,
     color?: string,
-    onClick?: () => void,
+    onClick?: (e) => void,
 }
 
 interface IField {
@@ -75,7 +81,9 @@ interface IField {
     placeholder: string,
     value: string,
     error: string,
+    required: boolean,
     validate?: () => void,
     disabled: boolean,
-    onBlur?: () => void,
+    incorrectMessage: string,
+    onBlur?: (e) => DocumentFragment | undefined,
 }
