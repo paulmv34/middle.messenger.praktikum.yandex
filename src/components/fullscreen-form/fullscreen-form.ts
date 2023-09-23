@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IButton, IField } from "../../types/main.types";
 import template from "./fullscreen-form.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     back: string,
     narrow: boolean,
     caption?: string,

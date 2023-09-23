@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IButton } from "../../types/main.types";
 import template from "./button.hbs?raw";
 
-interface IProps extends IButton {}
+interface IProps extends IButton, BlockProps {}
 
 export default class Button extends Block {
 

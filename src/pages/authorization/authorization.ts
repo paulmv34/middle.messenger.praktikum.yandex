@@ -1,8 +1,9 @@
 import Block from "../../core/Block";
 import template from "./authorization.hbs?raw";
 import {AuthorizationPageContext} from "../../main.data";
+import { BlockProps, IButton, IField, NodeEvent } from "../../types/main.types";
 
-interface IProps {
+interface IProps extends BlockProps {
     title?: string,
     caption?: string,
     errorText?: string,
@@ -20,10 +21,10 @@ export default class AuthorizationPage extends Block {
             initialProps.errorText = props.errorText;
         super(initialProps);
         const onSubmit = this.submit.bind(this);
-        this.props.onSubmit = (e) => onSubmit(e);
+        this.props.onSubmit = (e: NodeEvent<HTMLButtonElement>) => onSubmit(e);
     }
 
-    public submit(e) {
+    public submit(e: NodeEvent<HTMLButtonElement>) {
         console.log("Событие отправки формы");
         console.log(this.value());
         if (!this.validate()) {

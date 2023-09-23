@@ -1,7 +1,7 @@
 import EventBus from "./EventBus";
 import {nanoid} from "nanoid";
 import Handlebars from "handlebars";
-import {BlockProps} from "../types/main.types";
+import {BlockProps, Events, HandlebarsHelperEmbed} from "../types/main.types";
 
 // Нельзя создавать экземпляр данного класса
 export default class Block {
@@ -14,20 +14,22 @@ export default class Block {
 
     public id = nanoid(6);
     protected props: BlockProps;
+    protected _meta: BlockProps;
     protected refs: Record<string, Block> = {};
     protected children: Record<string, Block>;
     private eventBus: () => EventBus;
     private _element: HTMLElement | null = null;
     private _eventTarget: HTMLElement | null = null;
     private _partial: HTMLElement | null = null;
+    protected input: HTMLInputElement | null = null;
 
-    constructor(propsWithChildren: unknown = {}) {
+    constructor(propsWithChildren: BlockProps = {}) {
         const eventBus = new EventBus();
 
         const {props, children} = this._getChildrenAndProps(propsWithChildren);
 
         this._meta = {
-            propsf
+            props
         };
 
         this.children = children;
@@ -94,10 +96,9 @@ export default class Block {
     }
 
     protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
-        // Не было возможности проверить. Вероятно, сравнить анонимные функции, если они есть, не получится.
         if (oldProps.events || newProps.events)
             return true;
-        return JSON.stringify(oldProps) === JSON.stringify(newProps);
+        return oldProps !== newProps;
     }
 
     protected unmountComponent() {
@@ -115,7 +116,7 @@ export default class Block {
     }
 
     private _addEvents() {
-        const {events = {}} = this.props as { events: Record<string, () => void> };
+        const {events = {}} = this.props as { events: Events };
 
         Object.keys(events).forEach(eventName => {
             if (typeof (events[eventName]) == "function")
@@ -131,7 +132,7 @@ export default class Block {
     }
 
     private _removeEvents() {
-        const {events = {}} = this.props;
+        const {events = {}} = this.props as { events: Events };
 
         for (const eventName of Object.keys(events)) {
             if (typeof (events[eventName]) == "function")
@@ -169,7 +170,7 @@ export default class Block {
         const fragment = this.render();
 
         const newElement = fragment?.firstElementChild as HTMLElement;
-
+        
         if (this._element) {
             this._element.replaceWith(newElement);
         }
@@ -185,13 +186,13 @@ export default class Block {
     }
 
     protected compile(templateString: string, context: Record<string,unknown>) {
-        const contextAndStubs = {...context, __refs: this.refs};
+        const contextAndStubs: {__refs: Record<string, Block>, __children?: HandlebarsHelperEmbed[]} = {...context, __refs: this.refs};
         const template = Handlebars.compile(this.makePartialBlockContainer(templateString));
         const html = template(contextAndStubs);
         const temp = document.createElement("template");
         temp.innerHTML = html;
 
-        contextAndStubs.__children?.forEach(({embed}: unknown) => {
+        contextAndStubs.__children?.forEach(({embed}) => {
             embed(temp.content);
         });
 
@@ -239,15 +240,13 @@ export default class Block {
         return true;
     }
 
-    // Потенциально нужная переменная
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public setError(value: string = "") {
-
+    public setError(value: string | undefined = undefined) {
+        
     }
 
-    // Потенциально нужная переменная
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public validate(value: string = ""): boolean {
+    public validate(value?: string| undefined): boolean {
         return this.validateChildren();
     }
 

@@ -1,8 +1,9 @@
 import Block from "../../core/Block";
 import template from "./message-status.hbs?raw";
 import formatDate from "../../utils/format-date";
+import { BlockProps, MessageStatuses } from "../../types/main.types";
 
-interface IProps {
+interface IProps extends BlockProps {
     date: number,
     status: MessageStatuses,
     format?: string,

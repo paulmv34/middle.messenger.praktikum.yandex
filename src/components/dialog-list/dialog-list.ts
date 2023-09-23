@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IDialogMessage } from "../../types/main.types";
 import template from "./dialog-list.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     messages: IDialogMessage[]
 }
 

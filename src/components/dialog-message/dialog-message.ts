@@ -1,8 +1,9 @@
 import Block from "../../core/Block";
 import template from "./dialog-message.hbs?raw";
 import formatDate from "../../utils/format-date";
+import { BlockProps, IDialogMessage } from "../../types/main.types";
 
-interface IProps{
+interface IProps extends BlockProps{
     message: IDialogMessage
 }
 

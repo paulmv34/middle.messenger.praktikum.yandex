@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps } from "../../types/main.types";
 import template from "./message-counter.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     count: number,
 }
 

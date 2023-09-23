@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IField } from "../../types/main.types";
 import template from "./profile-fieldset.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     fields: IField[]
 }
 

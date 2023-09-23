@@ -1,20 +1,20 @@
 import Block from "../../core/Block";
+import { BlockProps, IDialogForm, NodeEvent } from "../../types/main.types";
 import template from "./dialog-form.hbs?raw";
 
-interface IProps extends IDialogForm {}
+interface IProps extends IDialogForm, BlockProps {}
+
+const inputClass = "dialog-form__message-field";
 
 export default class DialogForm extends Block {
-    protected baseInputClass: string = "dialog-form__message-field";
-    protected input: HTMLInputElement | null = null;
-
     constructor(props: IProps) {
         super(props);
         this.props.events = {
-            blur: (e) => this.onBlur(e),
-            input: (e) => this.onInput(e),
+            blur: (e: NodeEvent<HTMLFormElement>) => this.onBlur(e),
+            input: (e: NodeEvent<HTMLFormElement>) => this.onInput(e),
         };
         const onSubmit = this.submit.bind(this);
-        this.props.onSubmit = (e) => onSubmit(e);
+        this.props.onSubmit = (e: NodeEvent<HTMLButtonElement>) => onSubmit(e);
     }
 
     protected onBlur(e: NodeEvent<HTMLFormElement>) {
@@ -26,36 +26,37 @@ export default class DialogForm extends Block {
         if (!field)
             return;
         if (field.value.length > 0)
-            field.classList.remove(`${this.baseInputClass}_empty`);
+            field.classList.remove(`${inputClass}_empty`);
         else
-            field.classList.add(`${this.baseInputClass}_empty`);
+            field.classList.add(`${inputClass}_empty`);
     }
 
     public componentWillMount() {
-        this.eventTarget = this.element?.querySelector(`.${this.baseInputClass}`);
-        this.input = this.element?.querySelector(`.${this.baseInputClass}`);
+        if (this.element) {
+            this.eventTarget = this.element.querySelector(`.${inputClass}`);
+            this.input = this.element.querySelector(`.${inputClass}`);
+        }
     }
 
-    public validate(value: string = undefined):boolean {
-        let errorMessage = "";
+    public validate(value: string | undefined = undefined):boolean {
         if (typeof(value) == "undefined")
             value = this.input ? this.input.value : "";
         const valid = value.length > 0;
-        if (!valid) {
-            errorMessage = "Нет данных для отправки";
-            console.log(errorMessage);
-        }
         this.props.message = value;
         return valid;
     }
 
     public value(): Record<string, string> {
-        const result = {};
-        result["message"] = this.props.message;
+        const result = {
+            message: ""
+        };
+        if (typeof (this.props.message) == "string") {
+            result.message = this.props.message;
+        }
         return result;
     }
 
-    public submit(e) {
+    public submit(e: NodeEvent<HTMLButtonElement>) {
         console.log("Событие отправки формы");
         if (!this.validate()) {
             console.log("Форма заполнена с ошибками");

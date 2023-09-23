@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IButton } from "../../types/main.types";
 import template from "./profile-buttons.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     buttons: IButton[]
 }
 

@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IContacts, IDialog } from "../../types/main.types";
 import template from "./chat.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     title: string,
     contacts: IContacts,
     dialog: IDialog,

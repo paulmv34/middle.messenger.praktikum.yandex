@@ -1,28 +1,58 @@
+import { HelperOptions } from "handlebars";
 import Block from "../core/Block";
+import { validatorTypes } from "../utils/validate";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export type PageTypes = "authorization" | "registration" | "404" | "500" | "empty-chat"  | "chat" | "profile" | "profileEdit" | "passwordEdit";
 
 export type MessageStatuses = "send" | "received" | "read";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface HandlebarsHelperEmbed {
+    component: Block,
+    embed(fragment: DocumentFragment): void
+}
+
+export interface ComponentHelperOptionsDataRoot {
+    __refs: Record<string, Block>,
+    __children: HandlebarsHelperEmbed[],
+}
+
+export interface ComponentHelperOptions extends HelperOptions {
+    data: {
+        root: ComponentHelperOptionsDataRoot
+    }, 
+    // Не нашел способ заменить any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    fn: any
+}
+
 export interface NodeEvent<T = HTMLElement> extends Event {
     target: EventTarget & T;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export interface IContext {
+export interface IContext extends BlockProps {
     title?: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface IChat {
     contacts: IContacts;
     dialog?: IDialog;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export type BlockProps = Record<string, unknown | Block>;
+export type Props = Record<string, unknown | Block>;
+
+export interface BlockProps extends Props {
+    onClick?: (e: NodeEvent<HTMLElement>) => void,
+    onBlur?: (e: NodeEvent<HTMLFormElement>) => void,
+    onInput?: (e: NodeEvent<HTMLFormElement>) => void,
+    onSubmit?: (e: NodeEvent<HTMLButtonElement>) => void;
+    events?: Events
+}
+
+// Не нашел способ заменить any
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Events = Record<string, (e: any) => void>;
+
+export type Embed = (fragment: DocumentFragment) => void;
 
 export interface IContacts {
     search: string;
@@ -73,7 +103,6 @@ export interface IDialogMessage {
     dateLabel?: string,
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface IButton {
     button: boolean,
     page: string,
@@ -81,10 +110,8 @@ export interface IButton {
     label?: string,
     type?: string,
     color?: string,
-    onClick?: (e: NodeEvent<HTMLFormElement>) => void,
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export interface IField {
     label: string,
     name: string,
@@ -93,8 +120,8 @@ export interface IField {
     value: string,
     error: string,
     required: boolean,
-    validate?: () => void,
+    validator: validatorTypes,
     disabled: boolean,
     incorrectMessage: string,
-    onBlur?: (e: NodeEvent<HTMLFormElement>) => DocumentFragment | undefined,
+    edit: boolean,
 }

@@ -1,15 +1,15 @@
 import Block from "../../core/Block";
 import template from "./form-field.hbs?raw";
 import {validateFieldValue} from "../../utils/validate";
-import { IField, NodeEvent } from "../../types/main.types";
+import { BlockProps, IField, NodeEvent } from "../../types/main.types";
 
-interface IProps {
+interface IProps extends BlockProps {
     field: IField
 }
 
+const inputClass= "form-field__input";
+
 export default class FormField extends Block {
-    protected baseInputClass: string = "form-field__input";
-    protected input: HTMLInputElement | null = null;
 
     constructor(props: IProps) {
         super(props);
@@ -17,6 +17,10 @@ export default class FormField extends Block {
             blur: (e: NodeEvent<HTMLFormElement>) => this.onBlur(e),
             input: (e: NodeEvent<HTMLFormElement>) => this.onInput(e),
         };
+    }
+
+    protected getField(): IField {
+        return this.props.field as IField;
     }
 
     protected onBlur(e: NodeEvent<HTMLFormElement>) {
@@ -28,29 +32,32 @@ export default class FormField extends Block {
         if (!field)
             return;
         if (field.value.length > 0)
-            field.classList.remove(`${this.baseInputClass}_empty`);
+            field.classList.remove(`${inputClass}_empty`);
         else
-            field.classList.add(`${this.baseInputClass}_empty`);
+            field.classList.add(`${inputClass}_empty`);
     }
 
     public componentWillMount() {
-        this.eventTarget = this.element?.querySelector(`.${this.baseInputClass}`);
-        this.input = this.element?.querySelector(`.${this.baseInputClass}`);
+        if (this.element) {
+            this.eventTarget = this.element.querySelector(`.${inputClass}`);
+            this.input = this.element.querySelector(`.${inputClass}`);
+        }
     }
 
     public validate(value: string):boolean {
         let errorMessage = "";
+        const field = this.getField();
         if (typeof(value) == "undefined")
             value = this.input ? this.input.value : "";
-        let valid = this.props.field.required ? value.length > 0 : true;
+        let valid = field.required ? value.length > 0 : true;
         if (!valid)
             errorMessage = "Заполните поле";
-        if (this.props.field.validator)
-            valid = valid && validateFieldValue(value, this.props.field.validator);
+        if (field.validator)
+            valid = valid && validateFieldValue(value, field.validator);
         if (!valid && errorMessage === "")
-            errorMessage = this.props.field.incorrectMessage ?? "Поле заполнено некорректно";
+            errorMessage = field.incorrectMessage ?? "Поле заполнено некорректно";
         this.setProps({
-            field: Object.assign(this.props.field, {
+            field: Object.assign(field, {
                 error: valid ? "" : errorMessage,
                 value: value,
             })
@@ -59,17 +66,18 @@ export default class FormField extends Block {
     }
 
     public value(): Record<string, string> {
-        const result = {};
-        result[this.props.field.name] = this.props.field.value;
+        const result: Record<string, string> = {};
+        const field = this.getField();
+        result[field.name] = field.value;
         return result;
     }
 
     public setError(error: string) {
-        this.props.field.error = error;
+        this.getField().error = error;
     }
 
     public isValid():boolean {
-        return this.props.field.error === "";
+        return this.getField().error === "";
     }
 
     protected render(): DocumentFragment {

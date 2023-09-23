@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IContactsListItem } from "../../types/main.types";
 import template from "./contacts-item.hbs?raw";
 
-interface IProps extends IContactsListItem { }
+interface IProps extends IContactsListItem, BlockProps { }
 
 export default class ContactsItem extends Block {
     constructor(props: IProps) {

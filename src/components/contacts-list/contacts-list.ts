@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IContactsListItem } from "../../types/main.types";
 import template from "./contacts-list.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     list: IContactsListItem[]
 }
 

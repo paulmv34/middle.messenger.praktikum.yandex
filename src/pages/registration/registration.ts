@@ -1,8 +1,9 @@
 import Block from "../../core/Block";
 import template from "./registration.hbs?raw";
 import {RegistrationPageContext} from "../../main.data";
+import { BlockProps, IField, IButton, NodeEvent } from "../../types/main.types";
 
-interface IProps {
+interface IProps extends BlockProps  {
     title?: string,
     caption?: string,
     errorText?: string,
@@ -24,10 +25,10 @@ export default class RegistrationPage extends Block {
             initialProps.errorText = props.errorText;
         super(initialProps);
         const onSubmit = this.submit.bind(this);
-        this.props.onSubmit = (e) => onSubmit(e);
+        this.props.onSubmit = (e: NodeEvent<HTMLButtonElement>) => onSubmit(e);
     }
 
-    public submit(e) {
+    public submit(e: NodeEvent<HTMLButtonElement>) {
         const values = this.value();
         console.log("Событие отправки формы");
         console.log(values);

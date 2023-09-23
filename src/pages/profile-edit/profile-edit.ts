@@ -1,8 +1,9 @@
 import Block from "../../core/Block";
 import template from "./profile-edit.hbs?raw";
 import {ProfileEditPageContext} from "../../main.data";
+import { IField, IButton, NodeEvent, BlockProps } from "../../types/main.types";
 
-interface IProps {
+interface IProps extends BlockProps {
     title?: string,
     caption?: string,
     errorText?: string,
@@ -23,10 +24,10 @@ export default class ProfileEditPage extends Block {
             initialProps.errorText = props.errorText;
         super(initialProps);
         const onSubmit = this.submit.bind(this);
-        this.props.onSubmit = (e) => onSubmit(e);
+        this.props.onSubmit = (e: NodeEvent<HTMLButtonElement>) => onSubmit(e);
     }
 
-    public submit(e) {
+    public submit(e: NodeEvent<HTMLButtonElement>) {
         console.log("Событие отправки формы");
         console.log(this.value());
         if (!this.validate()) {

@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps, IButton, IField, NodeEvent } from "../../types/main.types";
 import template from "./password-edit.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     title?: string,
     caption?: string,
     back?: string,
@@ -16,10 +17,10 @@ export default class PasswordEditPage extends Block {
     constructor(props: IProps) {
         super(props);
         const onSubmit = this.submit.bind(this);
-        this.props.onSubmit = (e) => onSubmit(e);
+        this.props.onSubmit = (e: NodeEvent<HTMLButtonElement>) => onSubmit(e);
     }
 
-    public submit(e) {
+    public submit(e: NodeEvent<HTMLButtonElement>) {
         const values = this.value();
         console.log("Событие отправки формы");
         console.log(values);

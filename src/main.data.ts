@@ -1,5 +1,6 @@
 import avatarUrl from "./assets/images/avatar.jpg";
 import imageUrl from "./assets/images/image.jpg";
+import { IContactsListItem, IDialogMessage } from "./types/main.types";
 
 const DemoContacts: IContactsListItem[] = [
     {

@@ -1,7 +1,8 @@
 import Block from "../../core/Block";
+import { BlockProps } from "../../types/main.types";
 import template from "./message-avatar.hbs?raw";
 
-interface IProps {
+interface IProps extends BlockProps {
     online: boolean,
     src: string,
     alt: string,
