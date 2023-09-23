@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './form-buttons.hbs?raw';
+import template from "./form-buttons.hbs?raw";
 
 interface IProps {
     buttons: IButton[]

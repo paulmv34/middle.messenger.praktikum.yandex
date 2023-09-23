@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './profile-avatar.hbs?raw';
+import template from "./profile-avatar.hbs?raw";
 
 interface IProps {
     src: string,

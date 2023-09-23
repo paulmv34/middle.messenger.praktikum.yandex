@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './button.hbs?raw';
+import template from "./button.hbs?raw";
 
 interface IProps extends IButton {}
 
@@ -9,7 +9,7 @@ export default class Button extends Block {
         super(props);
         this.props.events = {
             click: this.props.onClick || (() => {})
-        }
+        };
     }
 
     public componentWillMount() {

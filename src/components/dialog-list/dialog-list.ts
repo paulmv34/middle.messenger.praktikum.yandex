@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './dialog-list.hbs?raw';
+import template from "./dialog-list.hbs?raw";
 
 interface IProps {
     messages: IDialogMessage[]

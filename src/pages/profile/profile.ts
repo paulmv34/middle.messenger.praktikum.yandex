@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './profile.hbs?raw';
+import template from "./profile.hbs?raw";
 
 interface IProps {
     title: string,
@@ -15,7 +15,7 @@ export default class ProfilePage extends Block {
         super(props);
         this.props.events = {
             click: this.props.onClick || (() => {})
-        }
+        };
     }
 
     protected render(): DocumentFragment {

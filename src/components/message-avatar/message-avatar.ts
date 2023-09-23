@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './message-avatar.hbs?raw';
+import template from "./message-avatar.hbs?raw";
 
 interface IProps {
     online: boolean,

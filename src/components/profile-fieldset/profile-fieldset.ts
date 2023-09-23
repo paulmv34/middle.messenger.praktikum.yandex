@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './profile-fieldset.hbs?raw';
+import template from "./profile-fieldset.hbs?raw";
 
 interface IProps {
     fields: IField[]

@@ -1,2 +1,2 @@
-import './form-fieldset.scss'
-export { default as FormFieldset } from './form-fieldset.ts';
+import "./form-fieldset.scss";
+export { default as FormFieldset } from "./form-fieldset.ts";

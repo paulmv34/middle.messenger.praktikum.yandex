@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './form-fieldset.hbs?raw';
+import template from "./form-fieldset.hbs?raw";
 
 interface IProps {
     fields: IField[]
@@ -11,7 +11,7 @@ export default class FormFieldset extends Block {
 
         this.props.events = {
             blur: this.props.onBlur || (() => {})
-        }
+        };
     }
 
     protected render(): DocumentFragment {

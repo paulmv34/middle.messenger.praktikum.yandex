@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './chat.hbs?raw';
+import template from "./chat.hbs?raw";
 
 interface IProps {
     title: string,

@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './contacts.hbs?raw';
+import template from "./contacts.hbs?raw";
 
 interface IProps extends IContacts {}
 

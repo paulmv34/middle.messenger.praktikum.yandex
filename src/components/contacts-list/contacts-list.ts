@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './contacts-list.hbs?raw';
+import template from "./contacts-list.hbs?raw";
 
 interface IProps {
     list: IContactsListItem[]

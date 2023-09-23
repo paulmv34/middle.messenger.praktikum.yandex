@@ -1,8 +1,8 @@
 enum HTTPTransportMethods {
-    Get = 'GET',
-    Put = 'PUT',
-    Post = 'POST',
-    Delete = 'DELETE',
+    Get = "GET",
+    Put = "PUT",
+    Post = "POST",
+    Delete = "DELETE",
 }
 
 type Data = null | Document | Record<string, string>;
@@ -18,13 +18,15 @@ const HTTPTransportDefaultTimeout = 5000;
 
 function queryStringify(data: Data) {
     if (!data)
-        return '';
+        return "";
     if (data instanceof Document)
-        throw new Error('Incorrect data type. It must be a Record<string, string> for the GET method.');
-    let queriedData = Object.entries(data).map(([key, value]) => `${key}=${value}`);
-    return queriedData ? '?' + queriedData.join('&') : '';
+        throw new Error("Incorrect data type. It must be a Record<string, string> for the GET method.");
+    const queriedData = Object.entries(data).map(([key, value]) => `${key}=${value}`);
+    return queriedData ? "?" + queriedData.join("&") : "";
 }
 
+// наличие класса необходимо по заданию второго модуля
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class HTTPTransport {
     get = (url: string, options: Options = {}) => {
         return this.request(url, {...options, method: HTTPTransportMethods.Get}, options.timeout);
@@ -42,7 +44,7 @@ class HTTPTransport {
         return this.request(url, {...options, method: HTTPTransportMethods.Delete}, options.timeout);
     };
 
-    request = (url: string, options: Options, timeout: number = 5000) => {
+    request = (url: string, options: Options, timeout: number = HTTPTransportDefaultTimeout) => {
         const {method = HTTPTransportMethods.Get, data = {}, headers = {}} = options;
         return new Promise((resolve, reject) => {
             if (method === HTTPTransportMethods.Get) {
@@ -51,7 +53,7 @@ class HTTPTransport {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
             xhr.timeout = timeout;
-            for (let key in headers) {
+            for (const key in headers) {
                 xhr.setRequestHeader(key, headers[key]);
             }
             xhr.onload = function() {

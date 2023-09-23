@@ -1,2 +1,2 @@
-import './dialog-contact.scss'
-export { default as DialogContact } from './dialog-contact.ts';
+import "./dialog-contact.scss";
+export { default as DialogContact } from "./dialog-contact.ts";

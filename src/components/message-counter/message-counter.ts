@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './message-counter.hbs?raw';
+import template from "./message-counter.hbs?raw";
 
 interface IProps {
     count: number,

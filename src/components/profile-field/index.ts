@@ -1,2 +1,2 @@
-import './profile-field.scss'
-export { default as ProfileField } from './profile-field.ts';
+import "./profile-field.scss";
+export { default as ProfileField } from "./profile-field.ts";

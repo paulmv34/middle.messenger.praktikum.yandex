@@ -1,6 +1,9 @@
 <div class="profile-field">
-        <div class="profile-field__wrapper{{#if field.error}} profile-field__wrapper_error{{/if}}{{#if field.edit}} profile-field__wrapper_edit{{/if}}{{#unless field.value}} profile-field__wrapper_empty{{/unless}}">
-        <div class="profile-field__label {{#unless field.value}} profile-field__label_empty{{/unless}}">{{field.label}}</div>
+    <div class="profile-field__wrapper{{#if field.error}} profile-field__wrapper_error{{/if}}{{#if
+            field.edit}} profile-field__wrapper_edit{{/if}}{{#unless
+            field.value}} profile-field__wrapper_empty{{/unless}}">
+        <div class="profile-field__label {{#unless
+                field.value}} profile-field__label_empty{{/unless}}">{{field.label}}</div>
         <input
                 class="profile-field__input"
                 name="{{field.name}}"

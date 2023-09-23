@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './contacts-head.hbs?raw';
+import template from "./contacts-head.hbs?raw";
 
 interface IProps {
     search: string,

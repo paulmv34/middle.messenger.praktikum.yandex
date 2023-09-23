@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './error.hbs?raw';
+import template from "./error.hbs?raw";
 
 interface IProps {
     title: string,
@@ -14,7 +14,7 @@ export default class ErrorPage extends Block {
         super(props);
         this.props.events = {
             click: this.props.onClick || (() => {})
-        }
+        };
     }
 
     protected render(): DocumentFragment {

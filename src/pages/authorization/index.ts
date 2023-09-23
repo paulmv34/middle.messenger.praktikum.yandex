@@ -1,2 +1,2 @@
-import './authorization.scss'
-export { default as AuthorizationPage } from './authorization.ts';
+import "./authorization.scss";
+export { default as AuthorizationPage } from "./authorization.ts";

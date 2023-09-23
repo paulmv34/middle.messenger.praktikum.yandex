@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './dialog-contact.hbs?raw';
+import template from "./dialog-contact.hbs?raw";
 
 interface IProps extends IDialogContact { }
 

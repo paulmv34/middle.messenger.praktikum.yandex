@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './dialog-empty.hbs?raw';
+import template from "./dialog-empty.hbs?raw";
 
 interface IProps { }
 

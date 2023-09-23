@@ -1,21 +1,22 @@
 import Block from "../../core/Block";
-import template from './form-field.hbs?raw';
+import template from "./form-field.hbs?raw";
 import {validateFieldValue} from "../../utils/validate";
+import { IField, NodeEvent } from "../../types/main.types";
 
 interface IProps {
     field: IField
 }
 
 export default class FormField extends Block {
-    protected baseInputClass = 'form-field__input';
-    protected input = null;
+    protected baseInputClass: string = "form-field__input";
+    protected input: HTMLInputElement | null = null;
 
     constructor(props: IProps) {
         super(props);
         this.props.events = {
-            blur: (e) => this.onBlur(e),
-            input: (e) => this.onInput(e),
-        }
+            blur: (e: NodeEvent<HTMLFormElement>) => this.onBlur(e),
+            input: (e: NodeEvent<HTMLFormElement>) => this.onInput(e),
+        };
     }
 
     protected onBlur(e: NodeEvent<HTMLFormElement>) {
@@ -38,33 +39,37 @@ export default class FormField extends Block {
     }
 
     public validate(value: string):boolean {
-        let errorMessage = ''
-        if (typeof(value) == 'undefined')
-            value = this.input.value;
+        let errorMessage = "";
+        if (typeof(value) == "undefined")
+            value = this.input ? this.input.value : "";
         let valid = this.props.field.required ? value.length > 0 : true;
         if (!valid)
-            errorMessage = 'Заполните поле';
+            errorMessage = "Заполните поле";
         if (this.props.field.validator)
             valid = valid && validateFieldValue(value, this.props.field.validator);
-        if (!valid && errorMessage === '')
-            errorMessage = this.props.field.incorrectMessage ?? 'Поле заполнено некорректно';
+        if (!valid && errorMessage === "")
+            errorMessage = this.props.field.incorrectMessage ?? "Поле заполнено некорректно";
         this.setProps({
             field: Object.assign(this.props.field, {
-                error: valid ? '' : errorMessage,
+                error: valid ? "" : errorMessage,
                 value: value,
             })
         });
         return valid;
     }
 
-    public value(): object {
-        let result = {};
+    public value(): Record<string, string> {
+        const result = {};
         result[this.props.field.name] = this.props.field.value;
         return result;
     }
 
-    public setError(error: string): object {
-        result[this.props.field.error] = error;
+    public setError(error: string) {
+        this.props.field.error = error;
+    }
+
+    public isValid():boolean {
+        return this.props.field.error === "";
     }
 
     protected render(): DocumentFragment {

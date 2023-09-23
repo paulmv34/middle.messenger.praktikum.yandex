@@ -1,2 +1,2 @@
-import './page.scss'
-export { default as Page } from './page.ts';
+import "./page.scss";
+export { default as Page } from "./page.ts";

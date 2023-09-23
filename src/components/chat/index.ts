@@ -1,2 +1,2 @@
-import './chat.scss'
-export { default as Chat } from './chat.ts';
+import "./chat.scss";
+export { default as Chat } from "./chat.ts";

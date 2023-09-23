@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './page.hbs?raw';
+import template from "./page.hbs?raw";
 
 interface IProps { }
 

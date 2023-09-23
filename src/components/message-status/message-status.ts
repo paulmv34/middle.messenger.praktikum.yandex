@@ -1,6 +1,6 @@
 import Block from "../../core/Block";
-import template from './message-status.hbs?raw';
-import formatDate from '../../utils/format-date';
+import template from "./message-status.hbs?raw";
+import formatDate from "../../utils/format-date";
 
 interface IProps {
     date: number,

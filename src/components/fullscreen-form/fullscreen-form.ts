@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './fullscreen-form.hbs?raw';
+import template from "./fullscreen-form.hbs?raw";
 
 interface IProps {
     back: string,

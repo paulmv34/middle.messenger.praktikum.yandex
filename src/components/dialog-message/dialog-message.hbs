@@ -18,7 +18,7 @@
                         <div class="dialog-message__text">
                             {{{message.message}}}
                             <div class="dialog-message__status-block">
-                                {{{ MessageStatus date=message.date status=message.displayedStatus format='H:i'}}}
+                                {{{ MessageStatus date=message.date status=message.displayedStatus format="H:i"}}}
                             </div>
                         </div>
                     {{/if}}
@@ -26,7 +26,7 @@
                         <div class="dialog-message__media">
                             <img src="{{message.image}}" class="dialog-message__image" alt="">
                             <div class="dialog-message__status-block dialog-message__status-block_image">
-                                {{{ MessageStatus date=message.date status=message.displayedStatus format='H:i'}}}
+                                {{{ MessageStatus date=message.date status=message.displayedStatus format="H:i"}}}
                             </div>
                         </div>
                     {{/if}}

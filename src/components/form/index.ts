@@ -1,2 +1,2 @@
-import './form.scss'
-export { default as Form } from './form.ts';
+import "./form.scss";
+export { default as Form } from "./form.ts";

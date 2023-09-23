@@ -1,5 +1,5 @@
 import Block from "../../core/Block";
-import template from './button-link.hbs?raw';
+import template from "./button-link.hbs?raw";
 
 interface IProps extends IButton {}
 
@@ -8,7 +8,7 @@ export default class ButtonLink extends Block {
         super(props);
         this.props.events = {
             click: this.props.onClick || (() => {})
-        }
+        };
     }
 
     protected render(): DocumentFragment {

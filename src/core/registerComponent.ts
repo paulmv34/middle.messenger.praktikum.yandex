@@ -1,36 +1,36 @@
-import Handlebars from 'handlebars';
+import Handlebars from "handlebars";
 import Block from "./Block";
 import {HelperOptions} from "handlebars";
 
 export function registerComponent(name: string, Component: typeof Block) {
-  if (name in Handlebars.helpers) {
-    throw `The ${name} component is already registered!`;
-  }
-
-  Handlebars.registerHelper(name, function (this: unknown, {hash, data, fn}: HelperOptions) {
-    const component = new Component(hash);
-    const dataAttribute = `data-id="${component.id}"`;
-    if ('ref' in hash) {
-      (data.root.__refs = data.root.__refs || {})[hash.ref] = component;
+    if (name in Handlebars.helpers) {
+        throw `The ${name} component is already registered!`;
     }
 
-    (data.root.__children = data.root.__children || []).push({
-      component,
-      embed(fragment: DocumentFragment) {
-        const stub = fragment.querySelector(`[${dataAttribute}]`);
-
-        if (!stub) {
-          return;
+    Handlebars.registerHelper(name, function (this: unknown, {hash, data, fn}: HelperOptions) {
+        const component = new Component(hash);
+        const dataAttribute = `data-id="${component.id}"`;
+        if ("ref" in hash) {
+            (data.root.__refs = data.root.__refs || {})[hash.ref] = component;
         }
 
-        component.getContent()?.after(...Array.from(stub.childNodes));
+        (data.root.__children = data.root.__children || []).push({
+            component,
+            embed(fragment: DocumentFragment) {
+                const stub = fragment.querySelector(`[${dataAttribute}]`);
 
-        stub.replaceWith(component.getElement()!);
-      }
+                if (!stub) {
+                    return;
+                }
+
+                component.getContent()?.after(...Array.from(stub.childNodes));
+
+                stub.replaceWith(component.getElement()!);
+            }
+        });
+
+        const contents = fn ? fn(this) : "";
+
+        return `<div ${dataAttribute}>${contents}</div>`;
     });
-
-    const contents = fn ? fn(this) : '';
-
-    return `<div ${dataAttribute}>${contents}</div>`;
-  });
 }

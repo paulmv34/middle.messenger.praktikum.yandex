@@ -1,26 +1,35 @@
-type PageTypes = "authorization" | "registration" | "404" | "500" | "empty-chat"  | "chat" | "profile" | "profileEdit" | "passwordEdit";
+import Block from "../core/Block";
 
-type MessageStatuses = "send" | "received" | "read";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type PageTypes = "authorization" | "registration" | "404" | "500" | "empty-chat"  | "chat" | "profile" | "profileEdit" | "passwordEdit";
 
-interface NodeEvent<T = HTMLElement> extends Event {
+export type MessageStatuses = "send" | "received" | "read";
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface NodeEvent<T = HTMLElement> extends Event {
     target: EventTarget & T;
 }
 
-interface IContext {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface IContext {
     title?: string;
 }
 
-interface IChat {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface IChat {
     contacts: IContacts;
     dialog?: IDialog;
 }
 
-interface IContacts {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export type BlockProps = Record<string, unknown | Block>;
+
+export interface IContacts {
     search: string;
     list: IContactsListItem[];
 }
 
-interface IContactsListItem {
+export interface IContactsListItem {
     current: boolean,
     avatar: string,
     username: string,
@@ -33,25 +42,25 @@ interface IContactsListItem {
     page: string,
 }
 
-interface IDialog {
+export interface IDialog {
     contact: IDialogContact,
     messages: IDialogMessage[],
     form: IDialogForm,
 }
 
-interface IDialogContact {
+export interface IDialogContact {
     avatar: string,
     username: string,
     online: boolean,
     status: string,
 }
 
-interface IDialogForm {
+export interface IDialogForm {
     message: string,
     attachments?: unknown,
 }
 
-interface IDialogMessage {
+export interface IDialogMessage {
     owner: boolean,
     avatar: string,
     username: string,
@@ -64,17 +73,19 @@ interface IDialogMessage {
     dateLabel?: string,
 }
 
-interface IButton {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface IButton {
     button: boolean,
     page: string,
     name: string,
     label?: string,
     type?: string,
     color?: string,
-    onClick?: (e) => void,
+    onClick?: (e: NodeEvent<HTMLFormElement>) => void,
 }
 
-interface IField {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export interface IField {
     label: string,
     name: string,
     type: string,
@@ -85,5 +96,5 @@ interface IField {
     validate?: () => void,
     disabled: boolean,
     incorrectMessage: string,
-    onBlur?: (e) => DocumentFragment | undefined,
+    onBlur?: (e: NodeEvent<HTMLFormElement>) => DocumentFragment | undefined,
 }

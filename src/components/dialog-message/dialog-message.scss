@@ -54,7 +54,9 @@
         line-height: 1.25;
     }
     &__body {
-
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
     &__text {
         color: $cBlack;
