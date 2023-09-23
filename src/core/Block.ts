@@ -240,13 +240,12 @@ export default class Block {
         return true;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public setError(value: string | undefined = undefined) {
-        
+        this.props.error = value;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public validate(value?: string| undefined): boolean {
+        this.props.value = value;
         return this.validateChildren();
     }
 
