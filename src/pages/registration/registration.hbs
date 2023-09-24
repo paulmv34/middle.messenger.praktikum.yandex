@@ -1,9 +1,23 @@
-{{#>Page}}
-    {{#>FullscreenForm narrow="true"}}
-        {{>Caption text=caption}}
-        {{#>Form}}
-            {{>FormFieldset fields=fields}}
-            {{>FormButtons buttons=buttons}}
+{{#Page}}
+    {{#FullscreenForm narrow="true"}}
+        {{{Caption text=caption}}}
+        {{#if errorText}}
+            {{{Text align='center' text=errorText error='true'}}}
+        {{/if}}
+        {{#Form}}
+            {{#FormFieldset}}
+                {{{FormField field=emailField ref='email'}}}
+                {{{FormField field=loginField ref='login'}}}
+                {{{FormField field=nameField ref='name'}}}
+                {{{FormField field=secondNameField ref='secondName'}}}
+                {{{FormField field=phoneField ref='phone'}}}
+                {{{FormField field=passwordField ref='password'}}}
+                {{{FormField field=passwordRepeatField ref='passwordRepeat'}}}
+            {{/FormFieldset}}
+            {{#FormButtons}}
+                {{{Button name=submitButton.name page=submitButton.page label=submitButton.label onClick=onSubmit}}}
+                {{{ButtonLink name=linkButton.name page=linkButton.page label=linkButton.label}}}
+            {{/FormButtons}}
         {{/Form}}
     {{/FullscreenForm}}
 {{/Page}}

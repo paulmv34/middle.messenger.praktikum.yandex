@@ -1,9 +1,18 @@
-{{#>Page}}
-    {{#>FullscreenForm narrow="true"}}
-        {{>Caption text=caption}}
-        {{#>Form}}
-            {{>FormFieldset fields=fields}}
-            {{>FormButtons buttons=buttons}}
+{{#Page}}
+    {{#FullscreenForm narrow="true"}}
+        {{{Caption text=caption page="empty-chat"}}}
+        {{#if errorText}}
+            {{{Text align="center" text=errorText error="true"}}}
+        {{/if}}
+        {{#Form}}
+            {{#FormFieldset}}
+                {{{FormField field=loginField ref="login"}}}
+                {{{FormField field=passwordField ref="password"}}}
+            {{/FormFieldset}}
+            {{#FormButtons}}
+                {{{Button name=submitButton.name page=submitButton.page label=submitButton.label onClick=onSubmit}}}
+                {{{ButtonLink name=linkButton.name page=linkButton.page label=linkButton.label}}}
+            {{/FormButtons}}
         {{/Form}}
     {{/FullscreenForm}}
 {{/Page}}

@@ -40,14 +40,13 @@ td {
     padding: 0;
 }
 
-li {
-    margin: 0;
-    padding: 0;
+a:hover {
+    text-decoration: none;
 }
 
-ul > li {
-	list-style-type: none;
-    list-style-position: outside;
+a:focus,
+a:active {
+    outline: 0 !important;
 }
 
 a:not([class]) {
@@ -59,21 +58,9 @@ a:not([class]) {
     }
 }
 
-a:hover {
-    text-decoration: none;
-}
-
-a:focus,
-a:active {
-    outline: 0 !important;
-}
-
 a[href^='tel:'] {
-
-}
-
-a img {
-    border: 0;
+    text-decoration: none;
+    color: $cBlack;
 }
 
 img {
@@ -83,11 +70,25 @@ img {
     height: auto;
 }
 
+a img {
+    border: 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
-li,
+li {
+    margin: 0;
+    padding: 0;
+}
+
+ul > li {
+    list-style-type: none;
+    list-style-position: outside;
+}
+
+ul > li,
 p {
     font-weight: 400;
     margin: 0 0 10px;

@@ -1,12 +1,23 @@
-{{#>Page}}
-    {{#>FullscreenForm}}
-        {{>Caption text=caption}}
+{{#Page}}
+    {{#FullscreenForm}}
+        {{{Caption text=caption}}}
         {{#if avatar}}
-            {{>ProfileAvatar src=avatar.src alt=avatar.username}}
+            {{{ProfileAvatar src=avatar.src alt=avatar.username page='404'}}}
         {{/if}}
-        {{#>Profile}}
-            {{>ProfileFieldset fields=fields}}
-            {{>ProfileButtons buttons=buttons}}
+        {{#Profile}}
+            {{#ProfileFieldset}}
+                {{{ProfileField field=emailField ref='email'}}}
+                {{{ProfileField field=loginField ref='login'}}}
+                {{{ProfileField field=displayNameField ref='displayName'}}}
+                {{{ProfileField field=nameField ref='name'}}}
+                {{{ProfileField field=secondNameField ref='secondName'}}}
+                {{{ProfileField field=phoneField ref='phone'}}}
+            {{/ProfileFieldset}}
+            {{#ProfileButtons}}
+                {{{ButtonLink page=editProfileButton.page label=editProfileButton.label}}}
+                {{{ButtonLink page=editPasswordButton.page label=editPasswordButton.label}}}
+                {{{ButtonLink name=logoutButton.name page=logoutButton.page label=logoutButton.label color=linkButton.color}}}
+            {{/ProfileButtons}}
         {{/Profile}}
     {{/FullscreenForm}}
 {{/Page}}

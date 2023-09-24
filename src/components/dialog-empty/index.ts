@@ -1,2 +1,2 @@
-import './dialog-empty.scss'
-export { default as DialogEmpty } from './dialog-empty.hbs?raw';
+import "./dialog-empty.scss";
+export { default as DialogEmpty } from "./dialog-empty.ts";

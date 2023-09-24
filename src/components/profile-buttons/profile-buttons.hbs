@@ -1,9 +1,10 @@
 <div class="profile-buttons">
     {{#each buttons}}
         {{#if this.button}}
-            {{> Button name=this.name page=this.page label=this.label}}
+            {{{ Button name=this.name page=this.page label=this.label}}}
         {{else}}
-            {{> ButtonLink name=this.name page=this.page label=this.label}}
+            {{{ ButtonLink name=this.name page=this.page label=this.label}}}
         {{/if}}
     {{/each}}
+    {{> @partial-block }}
 </div>

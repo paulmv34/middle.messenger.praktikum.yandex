@@ -1,2 +1,2 @@
-import './contacts-item.scss'
-export { default as ContactsItem } from './contacts-item.hbs?raw';
+import "./contacts-item.scss";
+export { default as ContactsItem } from "./contacts-item.ts";

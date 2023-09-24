@@ -1,2 +1,2 @@
-import './form-field.scss'
-export { default as FormField } from './form-field.hbs?raw';
+import "./form-field.scss";
+export { default as FormField } from "./form-field.ts";

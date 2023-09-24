@@ -38,7 +38,11 @@
         color: $cBlack;
         border: 0;
         outline: 0;
-        padding: 0;
+        padding: 0 0 0 20px;
+        border-left: 2px solid $cBlue;
+        &_empty {
+            border-left: 2px solid $cGray15;
+        }
         &::placeholder {
             color: $cGray;
             line-height: 3.75;
