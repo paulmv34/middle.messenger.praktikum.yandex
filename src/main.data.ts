@@ -200,8 +200,8 @@ const AuthorizationPageContext = {
     title: "Вход - Чатограм",
     caption: "Вход",
     errorText: "",
-    loginField: loginField({value: "ds34@ya.ru"}),
-    passwordField: passwordField({value: "ds341@ya.ru"}),
+    loginField: loginField(),
+    passwordField: passwordField(),
     submitButton: {
         name: "submit",
         page: "/messenger/",
