@@ -1,20 +1,17 @@
 import Block from "../../core/Block";
-import { BlockProps, IButton } from "../../types/main.types";
+import {Props, IButton, NodeEvent} from "../../types/types";
 import template from "./button.hbs?raw";
 
-interface IProps extends IButton, BlockProps {}
+interface IProps extends IButton, Props {
+    onClick?: (e: NodeEvent<HTMLElement>) => void,
+}
 
-export default class Button extends Block {
-
-    constructor(props: IProps) {
-        super(props);
-        this.props.events = {
-            click: this.props.onClick || (() => {})
+export default class Button extends Block<IProps> {
+    protected modifyProps(props: IProps = {}): IProps {
+        props.events = {
+            click: typeof (props.onClick) == "function" ? props.onClick : (() => {})
         };
-    }
-
-    public componentWillMount() {
-
+        return props;
     }
 
     protected render(): DocumentFragment {

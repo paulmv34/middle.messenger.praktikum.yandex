@@ -1,0 +1,18 @@
+{{#Modal}}
+    {{#FullscreenForm narrow="true" onClick=onClose}}
+        {{{CloseButton type='modal-close' onClick=onClose}}}
+        {{{Caption text=caption}}}
+        {{#if errorText}}
+            {{{Text align="center" text=errorText error="true"}}}
+        {{/if}}
+        {{#Form}}
+            {{#FormFieldset}}
+                {{{FormField field=loginField ref="loginField" onSearch=onSearch onChange=onChange}}}
+                {{{SearchList ref="searchList" onSelect=onSelect}}}
+            {{/FormFieldset}}
+            {{#FormButtons}}
+                {{{Button name=submitButton.name label=submitButton.label onClick=onSubmit}}}
+            {{/FormButtons}}
+        {{/Form}}
+    {{/FullscreenForm}}
+{{/Modal}}

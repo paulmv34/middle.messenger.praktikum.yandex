@@ -1,235 +1,20 @@
-import avatarUrl from "./assets/images/avatar.jpg";
-import imageUrl from "./assets/images/image.jpg";
-import { IContactsListItem, IDialogMessage } from "./types/main.types";
+import {Props} from "./types/types";
 
-const DemoContacts: IContactsListItem[] = [
-    {
-        current: false,
-        avatar: "",
-        username: "Андрей",
-        online: false,
-        status: "",
-        date: 1693062724,
-        label: "",
-        message: "Перезвони мне",
-        count: 2,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: avatarUrl,
-        username: "Вадим Вадимович Вадимов",
-        online: false,
-        status: "read",
-        date: 1693062724,
-        label: "Вы",
-        message: "Стикер",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Иванов Иван Иванович",
-        online: true,
-        status: "received",
-        date: 1693062724,
-        label: "Вы",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Антон",
-        online: false,
-        status: "",
-        date: 1693062724,
-        label: "",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 99,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "read",
-        date: 1693062724,
-        label: "Вы",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "",
-        date: 1693062724,
-        label: "",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 99,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "read",
-        date: 1693062724,
-        label: "Вы",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "",
-        date: 1693062724,
-        label: "",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "read",
-        date: 1693062724,
-        label: "Вы",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "",
-        date: 1693062724,
-        label: "",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "read",
-        date: 1693062724,
-        label: "Вы",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "",
-        date: 1693062724,
-        label: "",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 99,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "read",
-        date: 1693062724,
-        label: "Вы",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-    {
-        current: false,
-        avatar: "",
-        username: "Александр Александрович Александров",
-        online: false,
-        status: "",
-        date: 1693062724,
-        label: "",
-        message: "Текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк текст на несколько строк",
-        count: 0,
-        page: "chat",
-    },
-];
-
-const DemoContactsActive: IContactsListItem[] = [];
-DemoContacts.forEach(val => DemoContactsActive.push(Object.assign({}, val)));
-DemoContactsActive[1].current = true;
-DemoContactsActive[1].online = true;
-
-const DemoMessages: IDialogMessage[] = [
-    {
-        owner: true,
-        avatar: "",
-        username: "User Name",
-        message: `
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec ligula ipsum. Nunc sapien lacus, luctus a tortor id, congue ultricies ligula. Vivamus porttitor elit ut turpis iaculis, eget pretium elit dapibus. Nam pulvinar dignissim posuere. Quisque vitae mi sit amet risus consequat ornare. 
-            <br><br>
-            Mauris pretium sapien tincidunt neque ornare ullamcorper. Sed a vulputate erat. Ut id turpis tempor, molestie enim sed, mollis dolor. Integer non sagittis lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-        `,
-        image: "",
-        status: "read",
-        date: 1692976324,
-        showDateLabel: true,
-    },
-    {
-        owner: true,
-        avatar: "",
-        username: "User Name",
-        message: "",
-        image: imageUrl,
-        status: "read",
-        date: 1692976324,
-        showDateLabel: false,
-    },
-    {
-        owner: false,
-        avatar: avatarUrl,
-        username: "User Name",
-        message: `
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam nec ligula ipsum. Nunc sapien lacus, luctus a tortor id, congue ultricies ligula. Vivamus porttitor elit ut turpis iaculis, eget pretium elit dapibus. Nam pulvinar dignissim posuere. Quisque vitae mi sit amet risus consequat ornare. 
-            <br><br>
-            Mauris pretium sapien tincidunt neque ornare ullamcorper. Sed a vulputate erat. Ut id turpis tempor, molestie enim sed, mollis dolor. Integer non sagittis lacus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-        `,
-        image: "",
-        status: "read",
-        date: 1693062724,
-        showDateLabel: true,
-    },
-    {
-        owner: false,
-        avatar: avatarUrl,
-        username: "User Name",
-        message: "",
-        image: imageUrl,
-        status: "read",
-        date: 1693062724,
-        showDateLabel: false,
-    },
-];
-
-
+const avatarField = (fieldData: Record<string, string | boolean> = {}) => {
+    const defaultField = {
+        label: "Аватар",
+        name: "avatar",
+        type: "file",
+        placeholder: "Выберите файл",
+        value: "",
+        error: "",
+        validator: "image",
+        required: true,
+        edit: true,
+        id: "avatar-file-field",
+    };
+    return Object.assign(defaultField, fieldData);
+};
 
 const loginField = (fieldData: Record<string, string | boolean> = {}) => {
     const defaultField = {
@@ -252,10 +37,10 @@ const displayNameField = (fieldData: Record<string, string | boolean> = {}) => {
         name: "display_name",
         type: "text",
         placeholder: "Введите имя в чате",
-        value: "Иван",
+        value: "",
         error: "",
-        validator: "name", // Правила валидации в требованиях не указаны
-        required: true,
+        validator: "name",
+        required: false,
         edit: true,
     };
     return Object.assign(defaultField, fieldData);
@@ -351,6 +136,21 @@ const emailField = (fieldData: Record<string, string | boolean> = {}) => {
     return Object.assign(defaultField, fieldData);
 };
 
+const chatNameField = (fieldData: Record<string, string | boolean> = {}) => {
+    const defaultField = {
+        label: "Название чата",
+        name: "title",
+        type: "text",
+        placeholder: "Название чата",
+        value: "",
+        error: "",
+        validator: "chatName",
+        required: true,
+        edit: true,
+    };
+    return Object.assign(defaultField, fieldData);
+};
+
 const nameField = (fieldData: Record<string, string | boolean> = {}) => {
     const defaultField = {
         label: "Имя",
@@ -400,19 +200,88 @@ const AuthorizationPageContext = {
     title: "Вход - Чатограм",
     caption: "Вход",
     errorText: "",
-    loginField: loginField(),
-    passwordField: passwordField(),
+    loginField: loginField({value: "ds34@ya.ru"}),
+    passwordField: passwordField({value: "ds341@ya.ru"}),
     submitButton: {
         name: "submit",
-        page: "empty-chat",
+        page: "/messenger/",
         label: "Войти",
     },
     linkButton: {
         name: "register",
-        page: "registration",
+        page: "/sign-up/",
         label: "Зарегистрироваться",
     },
-};
+} as Props;
+
+const ModalUserAvatarContext = {
+    caption: "Изменить аватар пользователя",
+    errorText: "",
+    avatarField: avatarField({id: "userAvatar"}),
+    submitButton: {
+        name: "submit",
+        label: "Отправить",
+    },
+} as Props;
+
+const ModalSendFileContext = {
+    caption: "Отправить файл",
+    errorText: "",
+    avatarField: avatarField(),
+    submitButton: {
+        name: "submit",
+        label: "Отправить",
+    },
+} as Props;
+
+const ModalChatAvatarContext = {
+    caption: "Изменить аватар чата",
+    errorText: "",
+    avatarField: avatarField({id: "chatAvatar"}),
+    submitButton: {
+        name: "submit",
+        label: "Отправить",
+    },
+} as Props;
+
+const ModalCreateChatContext = {
+    caption: "Создать чат",
+    errorText: "",
+    chatName: chatNameField(),
+    submitButton: {
+        name: "submit",
+        label: "Отправить",
+    },
+} as Props;
+
+const ModalAddUserFormContext = {
+    caption: "Добавить пользователя в чат",
+    errorText: "",
+    loginField: loginField(),
+    submitButton: {
+        name: "submit",
+        label: "Отправить",
+    },
+} as Props;
+
+const ModalRemoveUserFormContext = {
+    caption: "Удалить пользователя из чата",
+    errorText: "",
+    loginField: loginField(),
+    submitButton: {
+        name: "submit",
+        label: "Отправить",
+    },
+} as Props;
+
+const ModalDeleteChatFormContext = {
+    caption: "Вы действительно хотите удалить чат?",
+    errorText: "",
+    submitButton: {
+        name: "submit",
+        label: "Удалить чат",
+    },
+} as Props;
 
 const RegistrationPageContext = {
     title: "Регистрация - Чатограм",
@@ -427,136 +296,125 @@ const RegistrationPageContext = {
     passwordRepeatField: passwordRepeatField(),
     submitButton: {
         name: "submit",
-        page: "empty-chat",
+        page: "/messenger/",
         label: "Зарегистрироваться",
     },
     linkButton: {
         name: "submit",
-        page: "authorization",
+        page: "/",
         label: "Войти",
     },
-};
+} as Props;
 
-const Error404PageContext = {
+const Error404Context = {
     title: "Ошибка 404 - Чатограм",
     caption: "Ошибка 404",
     text: "Страница не существует или была удалена.",
-    back: "empty-chat",
-    button: {
-        page: "empty-chat",
-        label: "Назад к чатам",
-    }
-};
+    back: "/",
+    label: "Назад к авторизации",
+} as Props;
 
-const Error500PageContext = {
+const Error404AuthorizedContext = {
+    title: "Ошибка 404 - Чатограм",
+    caption: "Ошибка 404",
+    text: "Страница не существует или была удалена.",
+    back: "/messenger/",
+    label: "Назад к чатам",
+} as Props;
+
+const Error500Context = {
     title: "Ошибка 500 - Чатограм",
     caption: "Ошибка 500",
     text: "Произошла ошибка. Скоро исправим.",
-    back: "empty-chat",
-    button: {
-        page: "empty-chat",
-        label: "Назад к чатам",
-    }
-};
+    back: "/",
+    label: "Назад к авторизации",
+} as Props;
 
-const EmptyChatPageContext = {
-    title: "Чатограм",
-    contacts: {
-        search: "",
-        list: DemoContacts,
-    },
-};
-
-const ChatPageContext = {
-    title: "Вадим Вадимович Вадимов - Чатограм",
-    contacts: {
-        search: "",
-        list: DemoContactsActive,
-    },
-    dialog: {
-        contact: {
-            avatar: avatarUrl,
-            username: "Вадим Вадимович Вадимов",
-            online: true,
-            status: "онлайн",
-        },
-        messages: DemoMessages,
-        form: {
-            message: ""
-        }
-    }
-};
+const Error500AuthorizedContext = {
+    title: "Ошибка 500 - Чатограм",
+    caption: "Ошибка 500",
+    text: "Произошла ошибка. Скоро исправим.",
+    back: "/messenger/",
+    label: "Назад к чатам",
+} as Props;
 
 const ProfilePageContext = {
     title: "Профиль - Чатограм",
     caption: "Профиль",
-    back: "empty-chat",
+    back: "/messenger/",
     avatar: {
         username: "Вадим Вадимович Вадимов",
-        src: avatarUrl,
+        src: "",
     },
-    emailField: emailField({edit: false, value: "test@mail.ru"}),
-    loginField: loginField({edit: false, value: "TestLogin"}),
-    displayNameField: displayNameField({edit: false, value: "Тестовое"}),
-    nameField: nameField({edit: false, value: "Иван"}),
-    secondNameField: secondNameField({edit: false, value: "Иванов-Сидоров"}),
-    phoneField: phoneField({edit: false, value: "+7 (960) 123-34-56"}),
+    emailField: emailField({edit: false}),
+    loginField: loginField({edit: false}),
+    displayNameField: displayNameField({edit: false}),
+    nameField: nameField({edit: false}),
+    secondNameField: secondNameField({edit: false}),
+    phoneField: phoneField({edit: false}),
     editProfileButton: {
-        page: "profileEdit",
+        page: "/settings/edit/",
         label: "Изменить данные",
     },
     editPasswordButton: {
-        page: "passwordEdit",
+        page: "/settings/password/",
         label: "Изменить пароль",
     },
     logoutButton: {
         name: "logout",
         color: "red",
-        page: "authorization",
+        page: "/",
         label: "Выйти",
     },
-};
+} as Props;
 
 const ProfileEditPageContext = {
     title: "Профиль - Чатограм",
     caption: "Профиль",
     errorText: "",
-    back: "profile",
-    emailField: emailField({edit: true, value: "test@mail.ru"}),
-    loginField: loginField({edit: true, value: "TestLogin"}),
-    displayNameField: displayNameField({edit: true, value: "Тестовое"}),
-    nameField: nameField({edit: true, value: "Иван"}),
-    secondNameField: secondNameField({edit: true, value: "Иванов-Сидоров"}),
-    phoneField: phoneField({edit: true, value: "+79601233456"}),
+    back: "/settings/",
+    emailField: emailField({edit: true}),
+    loginField: loginField({edit: true}),
+    displayNameField: displayNameField({edit: true}),
+    nameField: nameField({edit: true}),
+    secondNameField: secondNameField({edit: true}),
+    phoneField: phoneField({edit: true}),
     submitButton: {
         name: "submit",
-        page: "profile",
+        page: "/settings/",
         label: "Сохранить",
     },
-};
+} as Props;
 
 const PasswordEditPageContext = {
     title: "Изменить пароль - Чатограм",
     caption: "Изменить пароль",
     errorText: "",
-    back: "profile",
+    back: "/settings/",
     oldPasswordField: oldPasswordField(),
     newPasswordField: newPasswordField(),
     newPasswordRepeatField: newPasswordRepeatField(),
     submitButton: {
         name: "submit",
-        page: "profile",
+        page: "/settings/",
         label: "Сохранить",
     },
-};
+} as Props;
 
 export {
+    ModalSendFileContext,
+    ModalUserAvatarContext,
+    ModalCreateChatContext,
+    ModalDeleteChatFormContext,
+    ModalChatAvatarContext,
+    ModalAddUserFormContext,
+    ModalRemoveUserFormContext,
     AuthorizationPageContext,
     RegistrationPageContext,
-    Error404PageContext,
-    Error500PageContext,
-    EmptyChatPageContext,
-    ChatPageContext,
+    Error404Context,
+    Error404AuthorizedContext,
+    Error500Context,
+    Error500AuthorizedContext,
     ProfilePageContext,
     ProfileEditPageContext,
     PasswordEditPageContext

@@ -1,8 +1,23 @@
 <div class="dialog">
-    {{#if dialog}}
-        {{{ DialogContact contact=dialog.contact}}}
-        {{{ DialogList messages=dialog.messages}}}
-        {{{ DialogForm form=dialog.form}}}
+    {{#if chat}}
+        {{{ DialogContact dialog=chat onModalShow=onModalShow}}}
+        {{{ DialogList ref='dialogList' scrolledToTop=scrolledToTop}}}
+        <div class="dialog__form">
+            <div class="dialog__form-left">
+                {{#ContextMenuContainer}}
+                    {{{ButtonIcon type="attach"}}}
+                    {{#ContextMenu position="top-right" ref="contextMenu"}}
+                        {{{ContextMenuItem type="add-file" label="Отправить файл"}}}
+                    {{/ContextMenu}}
+                {{/ContextMenuContainer}}
+            </div>
+            {{{ DialogForm form=chat.form onSendMessage=onSendMessage}}}
+        </div>
+        {{{ModalSendFileForm ref='sendFileForm' chatId=chat.id}}}
+        {{{ModalChatAvatarForm ref='chatAvatarForm' chatId=chat.id}}}
+        {{{ModalAddUserForm ref='addUserForm' chatId=chat.id}}}
+        {{{ModalRemoveUserForm ref='removeUserForm' chatId=chat.id}}}
+        {{{ModalDeleteChatForm ref='deleteChatForm' chatId=chat.id}}}
     {{else}}
         {{{ DialogEmpty}}}
     {{/if}}

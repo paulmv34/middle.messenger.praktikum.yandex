@@ -1,0 +1,28 @@
+@import "/src/style/include";
+
+.close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 0 8px 0 8px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: url('close-button.svg') no-repeat center transparent;
+    &_file-reset {
+        top: calc(50% - 20px);
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background-image: url('close-button_file-reset.svg');
+    }
+    &:hover {
+        background-color: $cGrayHover;
+    }
+}

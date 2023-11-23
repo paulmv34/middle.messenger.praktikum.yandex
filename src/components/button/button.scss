@@ -5,7 +5,7 @@
     width: 100%;
     padding: 14px 20px;
     text-align: center;
-    color: $cWhite;
+    color: $cConstantWhite;
     background: $cBlue;
     font-size: 16px;
     font-weight: 400;
@@ -17,4 +17,10 @@
     &:hover {
         background: $cBlueHover;
     }
+}
+
+._no-send [name='submit'] {
+    pointer-events: none;
+    opacity: 0.5;
+    filter: grayscale(1);
 }

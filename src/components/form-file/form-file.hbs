@@ -1,0 +1,12 @@
+<div class="form-file">
+    <input
+            {{#if field.id}} id="{{field.id}}"{{/if}}
+            class="form-file__input{{#if field.error}} form-file__input_error{{/if}}{{#unless field.fileName}} form-file__input_empty{{/unless}}"
+            name="{{field.name}}"
+            type="file"
+            value=""
+    >
+    {{{CloseButton type="file-reset" onClick=resetValue}}}
+    <label class="form-file__label"{{#if field.id}} for="{{field.id}}"{{/if}}>{{#if field.fileName}}{{field.fileName}}{{else}}{{field.placeholder}}{{/if}}</label>
+    <div class="form-file__error">{{field.error}}</div>
+</div>

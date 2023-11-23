@@ -1,17 +1,20 @@
 import Block from "../../core/Block";
-import { BlockProps, IContactsListItem } from "../../types/main.types";
+import {Chat, Props} from "../../types/types";
 import template from "./contacts-list.hbs?raw";
+import {connect} from "../../utils/connect";
 
-interface IProps extends BlockProps {
-    list: IContactsListItem[]
+interface IProps extends Props {
+    chats: Chat[]
 }
 
-export default class ContactsList extends Block {
-    constructor(props: IProps) {
-        super(props);
-    }
-
+export class ContactsList extends Block<IProps> {
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
+
+    protected componentPropsUpdated() {
+
+    }
 }
+
+export default connect(({chats}) => {return ({chats});})(ContactsList);

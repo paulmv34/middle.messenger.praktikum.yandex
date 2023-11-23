@@ -1,6 +1,6 @@
 {{#Page}}
     {{#FullscreenForm narrow="true"}}
-        {{{Caption text=caption page="empty-chat"}}}
+        {{{Caption text=caption page="/messenger/"}}}
         {{#if errorText}}
             {{{Text align="center" text=errorText error="true"}}}
         {{/if}}
@@ -10,7 +10,7 @@
                 {{{FormField field=passwordField ref="password"}}}
             {{/FormFieldset}}
             {{#FormButtons}}
-                {{{Button name=submitButton.name page=submitButton.page label=submitButton.label onClick=onSubmit}}}
+                {{{Button name=submitButton.name label=submitButton.label onClick=onSubmit}}}
                 {{{ButtonLink name=linkButton.name page=linkButton.page label=linkButton.label}}}
             {{/FormButtons}}
         {{/Form}}

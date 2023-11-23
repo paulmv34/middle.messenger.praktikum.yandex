@@ -1,16 +1,23 @@
 <div class="dialog-contact">
     <div class="dialog-contact__avatar">
-        {{{ MessageAvatar src=contact.avatar alt=contact.username online=contact.online}}}
+        {{{ MessageAvatar src=dialog.avatar alt=dialog.title}}}
     </div>
     <div class="dialog-contact__info">
         <div class="dialog-contact__name">
-            {{contact.username}}
-        </div>
-        <div class="dialog-contact__status {{#if contact.online}} dialog-contact__status_online{{/if}}">
-            {{contact.status}}
+            {{dialog.title}}
         </div>
     </div>
     <div class="dialog-contact__actions">
-        {{{ ButtonIcon type="more" page="404"}}}
+        {{#ContextMenuContainer}}
+            {{{ButtonIcon type="more"}}}
+            {{#ContextMenu position="bottom-left" ref="ContextMenu"}}
+                {{{ContextMenuItem type="set-avatar" label="Изменить аватар" onClick=onModalShow dataModal="chatAvatar"}}}
+                {{{ContextMenuItem type="add-user" label="Добавить пользователя" onClick=onModalShow dataModal="addUser"}}}
+                {{{ContextMenuItem type="remove-user" label="Удалить пользователя" onClick=onModalShow dataModal="removeUser"}}}
+                {{#if dialog.canDelete}}
+                {{{ContextMenuItem type="delete-chat" label="Удалить чат" onClick=onModalShow dataModal="deleteChat"}}}
+                {{/if}}
+            {{/ContextMenu}}
+        {{/ContextMenuContainer}}
     </div>
 </div>

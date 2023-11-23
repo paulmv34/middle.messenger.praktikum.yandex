@@ -37,6 +37,9 @@
         color: $cBlue;
         background: $cWhite80;
         opacity: 0;
+        @media (prefers-color-scheme: dark) {
+            color: $cBlack;
+        }
     }
     &:hover &__change {
         opacity: 1;

@@ -1,0 +1,52 @@
+@import "/src/style/include";
+
+.form-file {
+    position: relative;
+    padding: 14px 0;
+    &__label {
+        display: block;
+        width: 100%;
+        padding: 5px 40px 5px 0;
+        border: 0;
+        //border-bottom: 1px solid $cBlue;
+        font-size: 16px;
+        line-height: 1.25;
+        font-weight: 400;
+        color: $cBlack;
+        text-align: center;
+        cursor: pointer;
+        &_error {
+            //border-bottom: 1px solid $cRed;
+        }
+        &_empty {
+            //border-bottom: 1px solid $cGray;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+    &__input {
+        display: none;
+    }
+    &__input_empty ~ &__label {
+        color: $cBlue;
+        padding-right: 0;
+        @media (prefers-color-scheme: dark) {
+            color: $cBlack;
+        }
+    }
+    &__input_empty ~ .close-button {
+        display: none;
+    }
+    &__error {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: $cRed;
+        font-size: 12px;
+        line-height: 14px;
+        font-weight: 400;
+        text-align: center;
+    }
+}

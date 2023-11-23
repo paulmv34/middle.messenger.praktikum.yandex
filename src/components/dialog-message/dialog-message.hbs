@@ -9,24 +9,24 @@
     <div class="dialog-message-row">
         <div class="dialog-message">
             <div class="dialog-message__avatar">
-                {{{ MessageAvatar src=message.avatar alt=message.username}}}
+                {{{ MessageAvatar src=message.user.avatar alt=message.username}}}
             </div>
-            <div class="dialog-message__container {{#if message.owner}}dialog-message__container_owned{{/if}}">
-                <div class="dialog-message__author">{{message.username}}</div>
+            <div class="dialog-message__container {{#if message.isOwner}}dialog-message__container_owned{{/if}}">
+                <div class="dialog-message__author">{{message.user.login}}</div>
                 <div class="dialog-message__body">
-                    {{#if message.message}}
+                    {{#if message.isMessage}}
                         <div class="dialog-message__text">
-                            {{{message.message}}}
+                            {{{message.content}}}
                             <div class="dialog-message__status-block">
-                                {{{ MessageStatus date=message.date status=message.displayedStatus format="H:i"}}}
+                                {{{ MessageStatus date=message.time format="H:i"}}}
                             </div>
                         </div>
                     {{/if}}
-                    {{#if message.image}}
+                    {{#if message.isFile}}
                         <div class="dialog-message__media">
-                            <img src="{{message.image}}" class="dialog-message__image" alt="">
+                            <img src="{{message.file}}" class="dialog-message__image" alt="">
                             <div class="dialog-message__status-block dialog-message__status-block_image">
-                                {{{ MessageStatus date=message.date status=message.displayedStatus format="H:i"}}}
+                                {{{ MessageStatus date=message.time format="H:i"}}}
                             </div>
                         </div>
                     {{/if}}

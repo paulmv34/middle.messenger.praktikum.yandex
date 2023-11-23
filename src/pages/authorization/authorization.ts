@@ -1,41 +1,62 @@
 import Block from "../../core/Block";
 import template from "./authorization.hbs?raw";
 import {AuthorizationPageContext} from "../../main.data";
-import { BlockProps, IButton, IField, NodeEvent } from "../../types/main.types";
+import {Props, IButton, IField, NodeEvent, RefType, ValueString} from "../../types/types";
+import {signin} from "../../services/auth";
+import {LoginRequestData} from "../../api/type";
+import FormField from "../../components/form-field/form-field";
+import {cloneDeep} from "../../utils/cloneDeep";
+import {isAlreadyAuthError} from "../../core/processHTTPError";
 
-interface IProps extends BlockProps {
+interface IProps extends Props {
     title?: string,
     caption?: string,
     errorText?: string,
-    loginField?: IField,
-    passwordField?: IField,
+    loginField?: IField<ValueString>,
+    passwordField?: IField<ValueString>,
     submitButton?: IButton,
     linkButton?: IButton,
-    //onSubmit?: (e):
+    onSubmit?: (e: NodeEvent<HTMLButtonElement>) => void
 }
 
-export default class AuthorizationPage extends Block {
-    constructor(props: IProps) {
-        const initialProps = AuthorizationPageContext;
-        if (props.errorText)
-            initialProps.errorText = props.errorText;
-        super(initialProps);
+interface IRefs extends RefType {
+    login: FormField,
+    password: FormField,
+}
+
+export default class AuthorizationPage extends Block <IProps, IRefs> {
+    static authRequired = "no";
+
+    constructor(props: IProps = {}) {
+        super(Object.assign(props, cloneDeep(AuthorizationPageContext)) as IProps);
+    }
+
+    protected modifyProps(props: IProps = {} as IProps): IProps {
         const onSubmit = this.submit.bind(this);
-        this.props.onSubmit = (e: NodeEvent<HTMLButtonElement>) => onSubmit(e);
+        props.onSubmit = (e: NodeEvent<HTMLButtonElement>) => onSubmit(e);
+        return props;
     }
 
     public submit(e: NodeEvent<HTMLButtonElement>) {
-        console.log("Событие отправки формы");
-        console.log(this.value());
+        e.preventDefault();
+        e.stopPropagation();
         if (!this.validate()) {
             this.props.errorText = "Форма заполнена с ошибками";
-            console.log("Форма заполнена с ошибками");
-            e.preventDefault();
-            e.stopPropagation();
         }
         else {
-            console.log("Ошибок нет, разрешаем переход");
-            this.props.errorText = "";
+            let errorText = "";
+            let alreadyAuth = false;
+            signin(this.value() as LoginRequestData).then(() => {
+                this.refs.login.setProps({value: ""});
+                this.refs.password.setProps({value: ""});
+            }).catch(error => {
+                alreadyAuth = isAlreadyAuthError(error);
+                errorText = error.message;
+            }).finally(() => {
+                this.props.errorText = errorText;
+                if (alreadyAuth)
+                    document.location.reload();
+            });
         }
     }
 

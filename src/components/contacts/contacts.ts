@@ -1,15 +1,12 @@
 import Block from "../../core/Block";
-import { BlockProps, IContacts } from "../../types/main.types";
+import {Props} from "../../types/types";
 import template from "./contacts.hbs?raw";
 
-interface IProps extends IContacts, BlockProps {}
+interface IProps extends Props {}
 
-export default class Contacts extends Block {
-    constructor(props: IProps) {
-        super(props);
-    }
-
+export default class Contacts extends Block<IProps> {
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
 }
+

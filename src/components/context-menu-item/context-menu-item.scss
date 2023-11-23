@@ -1,0 +1,59 @@
+@import "/src/style/include";
+
+.context-menu-item {
+    display: flex;
+    padding: 0;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.25;
+    color: $cBlack;
+    background: none;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+    }
+    &:before {
+        content: '';
+        display: block;
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        background: no-repeat center / contain;
+    }
+    &_add-file:before {
+        background-image: url('context-menu-item_add-file.svg');
+    }
+    &_add-image:before {
+        background-image: url('context-menu-item_add-image.svg');
+    }
+    &_add-location:before {
+        background-image: url('context-menu-item_add-location.svg');
+    }
+    &_add-user:before {
+        background-image: url('context-menu-item_add-user.svg');
+    }
+    &_delete-chat:before {
+        background-image: url('context-menu-item_delete-chat.svg');
+    }
+    &_logout:before {
+        background-image: url('context-menu-item_logout.svg');
+    }
+    &_new-chat:before {
+        background-image: url('context-menu-item_new-chat.svg');
+    }
+    &_profile:before {
+        background-image: url('context-menu-item_profile.svg');
+    }
+    &_remove-user:before {
+        background-image: url('context-menu-item_remove-user.svg');
+    }
+    &_set-avatar:before {
+        background-image: url('context-menu-item_set-avatar.svg');
+    }
+}

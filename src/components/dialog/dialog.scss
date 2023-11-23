@@ -8,4 +8,20 @@
     height: 100%;
     align-items: stretch;
     justify-content: center;
+    &__form {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px 20px 10px 10px;
+        border-top: 1px solid $cGrayStroke;
+        gap: 15px;
+        height: 80px;
+        flex-shrink: 0;
+        background: $cWhite;
+    }
+    &__form-left {
+        display: flex;
+        gap: 5px;
+        flex-shrink: 0;
+    }
 }

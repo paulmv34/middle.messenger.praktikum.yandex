@@ -1,3 +1,6 @@
+import {queryStringify} from "../utils/queryStringify";
+import constants from "../constants";
+
 enum HTTPTransportMethods {
     Get = "GET",
     Put = "PUT",
@@ -5,74 +8,75 @@ enum HTTPTransportMethods {
     Delete = "DELETE",
 }
 
-type Data = null | Document | Record<string, string>;
+type HTTPTransportData = null | FormData | Document | Record<string, Array<string | number> | string | number | File>;
 
-interface Options {
+type HTTPTransportOptions = {
     method?: HTTPTransportMethods,
-    data?: Data,
+    data?: HTTPTransportData,
     headers?: Record<string, string>,
     timeout?: number
 }
 
 const HTTPTransportDefaultTimeout = 5000;
 
-function queryStringify(data: Data) {
-    if (!data)
-        return "";
-    if (data instanceof Document)
-        throw new Error("Incorrect data type. It must be a Record<string, string> for the GET method.");
-    const queriedData = Object.entries(data).map(([key, value]) => `${key}=${value}`);
-    return queriedData ? "?" + queriedData.join("&") : "";
-}
-
-// наличие класса необходимо по заданию второго модуля
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 class HTTPTransport {
-    get = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: HTTPTransportMethods.Get}, options.timeout);
-    };
+    private apiUrl: string = "";
 
-    put = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: HTTPTransportMethods.Put}, options.timeout);
-    };
+    constructor(apiPath: string = "") {
+        this.apiUrl = `${constants.HOST}${apiPath}`;
+    }
 
-    post = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: HTTPTransportMethods.Post}, options.timeout);
-    };
+    get<TResponse> (url: string, options: HTTPTransportOptions = {}): Promise<TResponse> {
+        return this.request<TResponse>(`${this.apiUrl}${url}`, {...options, method: HTTPTransportMethods.Get}, options.timeout);
+    }
 
-    delete = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: HTTPTransportMethods.Delete}, options.timeout);
-    };
+    put<TResponse> (url: string, options: HTTPTransportOptions = {}): Promise<TResponse> {
+        return this.request<TResponse>(`${this.apiUrl}${url}`, {...options, method: HTTPTransportMethods.Put}, options.timeout);
+    }
 
-    request = (url: string, options: Options, timeout: number = HTTPTransportDefaultTimeout) => {
+    post<TResponse> (url: string, options: HTTPTransportOptions = {}): Promise<TResponse> {
+        return this.request<TResponse>(`${this.apiUrl}${url}`, {...options, method: HTTPTransportMethods.Post}, options.timeout);
+    }
+
+    delete<TResponse> (url: string, options: HTTPTransportOptions = {}): Promise<TResponse> {
+        return this.request<TResponse>(`${this.apiUrl}${url}`, {...options, method: HTTPTransportMethods.Delete}, options.timeout);
+    }
+
+    request<TResponse> (url: string, options: HTTPTransportOptions, timeout: number = HTTPTransportDefaultTimeout): Promise<TResponse> {
         const {method = HTTPTransportMethods.Get, data = {}, headers = {}} = options;
         return new Promise((resolve, reject) => {
             if (method === HTTPTransportMethods.Get) {
-                url += queryStringify(data);
+                url += "?" + queryStringify(data);
             }
             const xhr = new XMLHttpRequest();
+            xhr.responseType = "json";
             xhr.open(method, url);
+            xhr.withCredentials = true;
             xhr.timeout = timeout;
             for (const key in headers) {
                 xhr.setRequestHeader(key, headers[key]);
             }
-            xhr.onload = function() {
-                resolve(xhr);
-            };
+            xhr.onload = () => {resolve(xhr.response && xhr.response.reason ? {reason: xhr.response.reason, status: xhr.status} : xhr.response);};
 
-            xhr.onabort = reject;
-            xhr.onerror = reject;
-            xhr.ontimeout = reject;
+            const onReject = () => {reject({reason: xhr.response && xhr.response.reason ?  xhr.response.reason : xhr.response, status: xhr.status});};
+
+            xhr.onabort = onReject;
+            xhr.onerror = onReject;
+            xhr.ontimeout = onReject;
 
             if (method === HTTPTransportMethods.Get || !data) {
                 xhr.send(null);
             } else {
                 if (data instanceof Document) {
                     xhr.send(data);
+                } else if (data instanceof FormData) {
+                    xhr.send(data);
                 } else {
                     xhr.send(JSON.stringify(data));
                 }
             }
         });
-    };
+    }
 }
+
+export { HTTPTransport, HTTPTransportMethods };

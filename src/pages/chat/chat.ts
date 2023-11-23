@@ -1,17 +1,13 @@
 import Block from "../../core/Block";
-import { BlockProps, IContacts, IDialog } from "../../types/main.types";
+import {Props} from "../../types/types";
 import template from "./chat.hbs?raw";
 
-interface IProps extends BlockProps {
+interface IProps extends Props {
     title: string,
-    contacts: IContacts,
-    dialog: IDialog,
 }
 
-export default class ChatPage extends Block {
-    constructor(props: IProps) {
-        super(props);
-    }
+export default class ChatPage extends Block <IProps> {
+    static authRequired = "yes";
 
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
