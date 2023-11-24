@@ -46,7 +46,6 @@ class Route {
     match(pathname: string) {
         if (isRegex(this._pathname)) {
             return this._pathname.test(pathname);
-            //
         }
         else
             return isEqual(pathname, this._pathname);

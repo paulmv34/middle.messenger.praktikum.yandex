@@ -8,8 +8,10 @@ import {AuthorizationPage, RegistrationPage, ChatPage, ErrorPage, ProfilePage, P
 import {getUser} from "./services/auth";
 import {getChats} from "./services/chat";
 import Block from "./core/Block";
-import {Error404AuthorizedContext} from "./main.data";
+import {Error404AuthorizedContext, Error404Context} from "./main.data";
 import {processHTTPError} from "./core/processHTTPError";
+import {cloneDeep} from "./utils/cloneDeep";
+import {ErrorInfo} from "./core/showError";
 
 declare global {
     type Nullable<T> = T | null;
@@ -51,7 +53,18 @@ appRouter
     .use({
         pathname: "/error/",
         block: ErrorPage,
-        asErrorRoute: true
+        asErrorRoute: true,
+        onRoute: () => {
+            const state = appStore.getState();
+            if (!state.errorInfo || Object.values(state.errorInfo).length == 0) {
+                const baseErrorProps = cloneDeep(state.user ? Error404AuthorizedContext : Error404Context);
+                appStore.set({errorInfo: baseErrorProps as ErrorInfo});
+            }
+            return true;
+        },
+        onLeave: () => {
+            appStore.set({errorInfo: {}});
+        }
     })
     .use({
         pathname: "/settings/",
@@ -66,7 +79,7 @@ appRouter
         block: PasswordEditPage,
     })
     .use({
-        pathname: /\/messenger\/(?<chatId>\d*)/,
+        pathname: /\/messenger\/(:?(?<chatId>\d*)\/)?$/,
         block: ChatPage,
         onRoute: (data) => {
             let hasError = false;
