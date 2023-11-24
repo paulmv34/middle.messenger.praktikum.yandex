@@ -29,7 +29,7 @@ const startApp = async () => {
         }
     ).catch(
         () => {
-            appRouter.go(document.location.pathname !== "/" ? document.location.pathname : "/messenger/");
+            appRouter.go(document.location.pathname !== "/" ? document.location.pathname : "/");
         }
     );
 };
