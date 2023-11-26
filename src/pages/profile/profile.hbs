@@ -1,23 +1,24 @@
 {{#Page}}
-    {{#FullscreenForm}}
+    {{#FullscreenForm back="/messenger/"}}
         {{{Caption text=caption}}}
         {{#if avatar}}
-            {{{ProfileAvatar src=avatar.src alt=avatar.username page='404'}}}
+            {{{ProfileAvatar src=user.avatar alt=user.login onClick=onModalShow}}}
         {{/if}}
         {{#Profile}}
             {{#ProfileFieldset}}
-                {{{ProfileField field=emailField ref='email'}}}
-                {{{ProfileField field=loginField ref='login'}}}
-                {{{ProfileField field=displayNameField ref='displayName'}}}
-                {{{ProfileField field=nameField ref='name'}}}
-                {{{ProfileField field=secondNameField ref='secondName'}}}
-                {{{ProfileField field=phoneField ref='phone'}}}
+                {{{ProfileField field=emailField value=user.email ref='email'}}}
+                {{{ProfileField field=loginField value=user.login ref='login'}}}
+                {{{ProfileField field=displayNameField value=user.displayName ref='displayName'}}}
+                {{{ProfileField field=nameField value=user.firstName ref='name'}}}
+                {{{ProfileField field=secondNameField value=user.secondName ref='secondName'}}}
+                {{{ProfileField field=phoneField value=user.phone ref='phone'}}}
             {{/ProfileFieldset}}
             {{#ProfileButtons}}
                 {{{ButtonLink page=editProfileButton.page label=editProfileButton.label}}}
                 {{{ButtonLink page=editPasswordButton.page label=editPasswordButton.label}}}
-                {{{ButtonLink name=logoutButton.name page=logoutButton.page label=logoutButton.label color=linkButton.color}}}
+                {{{ButtonLink name=logoutButton.name label=logoutButton.label color=linkButton.color onClick=onLogoutClick}}}
             {{/ProfileButtons}}
         {{/Profile}}
     {{/FullscreenForm}}
+    {{{ModalUserAvatarForm ref='AvatarForm'}}}
 {{/Page}}

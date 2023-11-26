@@ -24,6 +24,8 @@
         font-size: 16px;
         line-height: 1.25;
         font-weight: 400;
+        background: $cWhite;
+        color: $cBlack;
         &_error {
             border-bottom: 1px solid $cRed;
         }

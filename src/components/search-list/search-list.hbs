@@ -1,0 +1,18 @@
+<div class="search-list">
+    {{#if this.hasResult}}
+    <div class="search-list__list scrollbar">
+        {{#each list}}
+            <div class="search-list__item" data-login="{{this.login}}" data-id="{{this.id}}" data-first-name="{{this.firstName}}" data-second-name="{{this.secondName}}">
+                <div class="search-list__item-avatar" {{#if this.avatar}}style="background-image: url('{{this.avatar}}')"{{/if}}></div>
+                <div class="search-list__item-login">{{this.login}}</div>
+            </div>
+        {{/each}}
+    </div>
+    {{else}}
+        {{#if this.showNoResult}}
+        <div class="search-list__list scrollbar">
+            <div class="search-list__empty">Ничего не найдено...</div>
+        </div>
+        {{/if}}
+    {{/if}}
+</div>

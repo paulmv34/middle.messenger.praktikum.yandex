@@ -1,0 +1,11 @@
+@import "/src/style/include";
+
+.context-menu-container {
+    position: relative;
+}
+
+.context-menu-container:hover .context-menu {
+    visibility: visible;
+    opacity: 1;
+    //pointer-events: auto;
+}

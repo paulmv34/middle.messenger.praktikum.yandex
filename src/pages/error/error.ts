@@ -1,24 +1,26 @@
 import Block from "../../core/Block";
-import { BlockProps, IButton } from "../../types/main.types";
+import {Props, NodeEvent} from "../../types/types";
 import template from "./error.hbs?raw";
+import {connect} from "../../utils/connect";
 
-interface IProps extends BlockProps {
-    title: string,
-    caption: string,
-    text: string,
-    back: string,
-    button: IButton,
+interface IProps extends Props {
+    errorInfo: Record<string, number | string>,
+    onClick?: (e: NodeEvent<HTMLElement>) => void,
 }
 
-export default class ErrorPage extends Block {
-    constructor(props: IProps) {
-        super(props);
-        this.props.events = {
-            click: this.props.onClick || (() => {})
+export class ErrorPage extends Block<IProps> {
+    static authRequired = "any";
+
+    protected modifyProps(props: IProps = {} as IProps): IProps {
+        props.events = {
+            click: props.onClick || (() => {})
         };
+        return props;
     }
 
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }
 }
+
+export default connect(({errorInfo}) => ({errorInfo}))(ErrorPage);

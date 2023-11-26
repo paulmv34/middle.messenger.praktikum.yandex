@@ -1,44 +1,109 @@
 import "./style/main.scss";
-import "./types/main.types";
-import Block from "./core/Block";
 import * as Components from "./components";
 import {registerComponent} from "./core/registerComponent";
-import * as Pages from "./pages";
-import * as Contexts from "./main.data";
-import { PageTypes, BlockProps } from "./types/main.types";
+import {PageTypes, Props, RefType} from "./types/types";
+import {appStore} from "./core/Store";
+import {appRouter} from "./core/Router";
+import {AuthorizationPage, RegistrationPage, ChatPage, ErrorPage, ProfilePage, ProfileEditPage, PasswordEditPage} from "./pages";
+import {getUser} from "./services/auth";
+import {getChats} from "./services/chat";
+import Block from "./core/Block";
+import {Error404AuthorizedContext, Error404Context} from "./main.data";
+import {processHTTPError} from "./core/processHTTPError";
+import {cloneDeep} from "./utils/cloneDeep";
+import {ErrorInfo} from "./core/showError";
 
-const pages:{[key: string]: [object, object]} = {
-    "authorization": [ Pages.AuthorizationPage, Contexts.AuthorizationPageContext],
-    "registration": [ Pages.RegistrationPage, Contexts.RegistrationPageContext],
-    "404": [ Pages.ErrorPage, Contexts.Error404PageContext],
-    "500": [ Pages.ErrorPage, Contexts.Error500PageContext],
-    "empty-chat": [ Pages.ChatPage, Contexts.EmptyChatPageContext],
-    "chat": [ Pages.ChatPage, Contexts.ChatPageContext],
-    "profile": [ Pages.ProfilePage, Contexts.ProfilePageContext],
-    "profileEdit": [ Pages.ProfileEditPage, Contexts.ProfileEditPageContext],
-    "passwordEdit": [ Pages.PasswordEditPage, Contexts.PasswordEditPageContext],
+declare global {
+    type Nullable<T> = T | null;
+}
+
+const startApp = async () => {
+    getUser().then(
+        (me) => {
+            appStore.set({user: me});
+            getChats().then(chats => {
+                appStore.set({chats});
+                appRouter.go(document.location.pathname !== "/" ? document.location.pathname : "/messenger/");
+            }).catch(error => {
+                processHTTPError(error);
+            });
+
+        }
+    ).catch(
+        () => {
+            appRouter.go(document.location.pathname !== "/" ? document.location.pathname : "/");
+        }
+    );
 };
 
 Object.entries(Components).forEach(([ name, component ]) => {
-    registerComponent(name, component);
+    registerComponent(name, component as typeof Block<Props, RefType>);
 });
 
-function navigate(page: PageTypes) {
-    const [ PageComponent, context ]: [typeof Block, BlockProps] = pages[page] as [typeof Block, BlockProps];
-    const container = document.getElementById("app");
-    if (context.title)
-        document.title = <string>context.title;
-    const pageComponent = new PageComponent(context);
-    const element = pageComponent.getElement();
-    if (container && element) {
-        if (container.childNodes.length > 0)
-            container.replaceChildren(element);
-        else
-            container.append(element);
-    }
-}
+appRouter
+    .use({
+        pathname: "/",
+        block: AuthorizationPage,
+        asStartRoute: true
+    })
+    .use({
+        pathname: "/sign-up/",
+        block: RegistrationPage,
+    })
+    .use({
+        pathname: "/error/",
+        block: ErrorPage,
+        asErrorRoute: true,
+        onRoute: () => {
+            const state = appStore.getState();
+            if (!state.errorInfo || Object.values(state.errorInfo).length == 0) {
+                const baseErrorProps = cloneDeep(state.user ? Error404AuthorizedContext : Error404Context);
+                appStore.set({errorInfo: baseErrorProps as ErrorInfo});
+            }
+            return true;
+        },
+        onLeave: () => {
+            appStore.set({errorInfo: {}});
+        }
+    })
+    .use({
+        pathname: "/settings/",
+        block: ProfilePage,
+    })
+    .use({
+        pathname: "/settings/edit/",
+        block: ProfileEditPage,
+    })
+    .use({
+        pathname: "/settings/password/",
+        block: PasswordEditPage,
+    })
+    .use({
+        pathname: /\/messenger\/(:?(?<chatId>\d*)\/)?$/,
+        block: ChatPage,
+        onRoute: (data) => {
+            let hasError = false;
+            const state = appStore.getState();
+            const chatId = data.chatId ? parseInt(data.chatId) : 0;
+            let activeChat = null;
+            if (chatId && state.chats) {
+                state.chats?.forEach(chat => {
+                    if (chat.id === chatId)
+                        activeChat = chat;
+                });
+            }
+            if (!activeChat && chatId) {
+                appStore.set({errorInfo: Error404AuthorizedContext});
+                hasError = true;
+            }
+            appStore.set({chat: activeChat});
+            return !hasError;
+        }
+    })
+    .start(
+        () => startApp()
+    );
 
-document.addEventListener("DOMContentLoaded", () => navigate("authorization"));
 
 document.addEventListener("click", (e:MouseEvent) => {
     const closestDataPage = e.target instanceof Element ? e.target.closest("[data-page]") : undefined;
@@ -48,6 +113,6 @@ document.addEventListener("click", (e:MouseEvent) => {
     if (page) {
         e.preventDefault();
         e.stopImmediatePropagation();
-        navigate(page);
+        appRouter.go(page);
     }
 });

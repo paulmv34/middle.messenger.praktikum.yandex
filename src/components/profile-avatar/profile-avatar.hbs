@@ -1,6 +1,6 @@
 <div class="profile-avatar{{#unless src}} profile-avatar_empty{{/unless}}">
     {{#if src}}
-        <img src="{{src}}" alt="{{alt}}">
+        <img src="{{src}}" alt="{{alt}}" class="profile-avatar__img">
     {{/if}}
-    <div class="profile-avatar__change" data-page="{{page}}">Поменять<br>аватар</div>
+    <div class="profile-avatar__change" {{#if page}}data-page="{{page}}"{{/if}}>Поменять<br>аватар</div>
 </div>

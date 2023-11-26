@@ -1,0 +1,37 @@
+@import "/src/style/include";
+
+.context-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border: 1px solid $cGrayStroke;
+    border-radius: 8px;
+    overflow: auto;
+    background: $cContext;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 300ms, visibility 300ms;
+    z-index: 2;
+    //pointer-events: none;
+    &_bottom-left {
+        top: 100%;
+        right: 0;
+    }
+    &_bottom-right {
+        top: 100%;
+        left: 0;
+    }
+    &_top-left {
+        bottom: 100%;
+        right: 0;
+    }
+    &_top-right {
+        bottom: 100%;
+        left: 0;
+    }
+}

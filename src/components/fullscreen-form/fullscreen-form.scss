@@ -22,6 +22,7 @@
         position: relative;
     }
     &__form {
+        position: relative;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -33,7 +34,7 @@
         border-radius: 8px;
         width: 100%;
         max-width: 600px;
-        overflow: auto;
+        //overflow: auto;
         background: $cWhite;
         &_narrow {
             max-width: 420px;
@@ -52,5 +53,6 @@
         border-right: 1px solid $cGrayStroke;
         background: $cLightGrayBg;
         z-index: 5;
+        cursor: pointer;
     }
 }

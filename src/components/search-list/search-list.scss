@@ -1,0 +1,42 @@
+@import "/src/style/include";
+
+.search-list {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    &__list {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        border: 1px solid $cGrayStroke;
+        border-radius: 8px;
+        background: $cWhite;
+        padding: 10px 0;
+        max-height: calc(50vh - 52px);
+        overflow: auto;
+        z-index: 1;
+    }
+    &__item {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        padding: 4px 20px;
+        cursor: pointer;
+        &:hover {
+            background: $cBlue15;
+        }
+    }
+    &__empty {
+        padding: 4px 20px;
+        text-align: center;
+    }
+    &__item-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid $cGray;
+        background: $cGrayStroke no-repeat center / cover;
+    }
+}

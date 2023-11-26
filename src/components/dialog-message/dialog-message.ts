@@ -1,17 +1,17 @@
 import Block from "../../core/Block";
 import template from "./dialog-message.hbs?raw";
-import formatDate from "../../utils/format-date";
-import { BlockProps, IDialogMessage } from "../../types/main.types";
+import formatDate from "../../utils/formatDate";
+import {Props, Message} from "../../types/types";
 
-interface IProps extends BlockProps{
-    message: IDialogMessage
+interface IProps extends Props {
+    message: Message,
 }
 
-export default class DialogMessage extends Block {
+export default class DialogMessage extends Block<IProps> {
     constructor(props: IProps) {
-        if (props.message.date)
-            props.message.dateLabel = formatDate(props.message.date, "d M");
-        props.message.displayedStatus = props.message.owner ? props.message.status : undefined;
+        props.message.isMessage = props.message.type == "message";
+        props.message.isFile = props.message.type == "file" || props.message.type == "sticker";
+        props.message.dateLabel = formatDate(props.message.time, "d M");
         super(props);
     }
 

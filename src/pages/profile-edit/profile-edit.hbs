@@ -1,17 +1,17 @@
 {{#Page}}
-    {{#FullscreenForm back="profile"}}
+    {{#FullscreenForm back="/settings/"}}
         {{{Caption text=caption}}}
         {{#if errorText}}
             {{{Text align="center" text=errorText error="true"}}}
         {{/if}}
         {{#Profile}}
             {{#ProfileFieldset}}
-                {{{ProfileField field=emailField ref="email"}}}
-                {{{ProfileField field=loginField ref="login"}}}
-                {{{ProfileField field=displayNameField ref="displayName"}}}
-                {{{ProfileField field=nameField ref="name"}}}
-                {{{ProfileField field=secondNameField ref="secondName"}}}
-                {{{ProfileField field=phoneField ref="phone"}}}
+                {{{ProfileField field=emailField value=user.email ref='email'}}}
+                {{{ProfileField field=loginField value=user.login ref='login'}}}
+                {{{ProfileField field=displayNameField value=user.displayName ref='displayName'}}}
+                {{{ProfileField field=nameField value=user.firstName ref='name'}}}
+                {{{ProfileField field=secondNameField value=user.secondName ref='secondName'}}}
+                {{{ProfileField field=phoneField value=user.phone ref='phone'}}}
             {{/ProfileFieldset}}
             {{#ProfileButtons}}
                 {{{Button name=submitButton.name page=submitButton.page label=submitButton.label onClick=onSubmit}}}

@@ -1,35 +1,49 @@
 import Block from "../../core/Block";
 import template from "./profile-field.hbs?raw";
-import {validateFieldValue} from "../../utils/validate";
-import { BlockProps, IField, NodeEvent } from "../../types/main.types";
+import {validate} from "../../utils/validate";
+import {Props, IField, NodeEvent, ValueString} from "../../types/types";
 
-interface IProps extends BlockProps {
-    field: IField
+interface IProps extends Props {
+    field: IField<ValueString>,
+    value?: ValueString
 }
 
 const inputClass= "profile-field__input";
 
-export default class ProfileField extends Block {
-    constructor(props: IProps) {
-        super(props);
-        this.props.events = {
-            blur: (e: NodeEvent<HTMLFormElement>) => this.onBlur(e),
-            input: (e: NodeEvent<HTMLFormElement>) => this.onInput(e),
+export default class ProfileField extends Block<IProps> {
+    constructor(props: IProps = {} as IProps) {
+        super(Object.assign(props, {}));
+    }
+
+    protected modifyProps(props: IProps = {} as IProps): IProps {
+        if (props.value && props.value !== "" && (!props.field.value || props.field.value === ""))
+            props.field.value = props.value;
+        else if (props.field.value && props.field.value !== "")
+            props.value = props.field.value ? props.field.value : "";
+        props.events = {
+            blur: (e: NodeEvent<HTMLElement>) => this.onBlur(e),
+            input: (e: NodeEvent<HTMLElement>) => this.onInput(e),
         };
+        return props;
     }
 
-    protected getField(): IField {
-        return this.props.field as IField;
+    protected getField(): IField<ValueString> {
+        return this.props.field as IField<ValueString>;
     }
 
-    protected onBlur(e: NodeEvent<HTMLFormElement>) {
+    protected onBlur(e: NodeEvent<HTMLElement>) {
         if (!this.getField().edit)
             return;
-        this.validate(e.target.value);
+        if (e.target instanceof HTMLInputElement)
+            this.validate(e.target.value);
+        else
+            return;
     }
 
-    protected onInput(e: NodeEvent<HTMLFormElement>) {
+    protected onInput(e: NodeEvent<HTMLElement>) {
         if (!this.getField().edit)
+            return;
+        if (!(e.target instanceof HTMLInputElement))
             return;
         const field = e.target;
         if (!field)
@@ -47,7 +61,7 @@ export default class ProfileField extends Block {
         }
     }
 
-    public validate(value: string):boolean {
+    public validate(value: string, silent: boolean = false):boolean {
         let errorMessage = "";
         const field = this.getField();
         if (typeof(value) == "undefined")
@@ -55,23 +69,35 @@ export default class ProfileField extends Block {
         let valid = field.required ? value.length > 0 : true;
         if (!valid)
             errorMessage = "Заполните поле";
-        if (field.validator)
-            valid = valid && validateFieldValue(value, field.validator);
+        if (field.validator && value.length > 0)
+            valid = valid && validate(value, field.validator);
         if (!valid && errorMessage === "")
             errorMessage = field.incorrectMessage ?? "Поле заполнено некорректно";
-        this.setProps({
-            field: Object.assign(field, {
-                error: valid ? "" : errorMessage,
-                value: value,
-            })
-        });
+        if (!silent) {
+            this.setProps({
+                field: Object.assign(field, {
+                    value: value,
+                    error: valid ? "" : errorMessage,
+                }),
+            } as IProps);
+        }
         return valid;
     }
 
-    public value(): Record<string, string> {
-        const result: Record<string, string> = {};
+    public resetValue() {
         const field = this.getField();
-        result[field.name] = field.value;
+        this.setProps({
+            field: Object.assign(field, {
+                error: "",
+                value: "",
+            }),
+        } as IProps);
+    }
+
+    public value(): Record<string, ValueString> {
+        const result: Record<string, ValueString> = {};
+        const field = this.getField();
+        result[field.name] = this.props.field.value;
         return result;
     }
 

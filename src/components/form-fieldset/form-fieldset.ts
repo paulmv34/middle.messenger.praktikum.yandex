@@ -1,20 +1,10 @@
 import Block from "../../core/Block";
-import { BlockProps, IField } from "../../types/main.types";
+import { Props } from "../../types/types";
 import template from "./form-fieldset.hbs?raw";
 
-interface IProps extends BlockProps {
-    fields: IField[]
-}
+interface IProps extends Props {}
 
-export default class FormFieldset extends Block {
-    constructor(props: IProps) {
-        super(props);
-
-        this.props.events = {
-            blur: this.props.onBlur || (() => {})
-        };
-    }
-
+export default class FormFieldset extends Block<IProps> {
     protected render(): DocumentFragment {
         return this.compile(template, this.props);
     }

@@ -1,27 +1,34 @@
 import Block from "../../core/Block";
-import { BlockProps, IDialogForm, NodeEvent } from "../../types/main.types";
+import {Props, NodeEvent, MessageFormData} from "../../types/types";
 import template from "./dialog-form.hbs?raw";
 
-interface IProps extends IDialogForm, BlockProps {}
+interface IProps extends Props {
+    onSendMessage?: (messageFormData: MessageFormData) => void,
+    onSubmit?: (e: NodeEvent<HTMLElement>) => void,
+    message?: string
+}
 
-const inputClass = "dialog-form__message-field";
+const inputClass = "dialog-form__field";
 
-export default class DialogForm extends Block {
-    constructor(props: IProps) {
-        super(props);
-        this.props.events = {
-            blur: (e: NodeEvent<HTMLFormElement>) => this.onBlur(e),
-            input: (e: NodeEvent<HTMLFormElement>) => this.onInput(e),
+export default class DialogForm extends Block<IProps> {
+    protected modifyProps(props: IProps = {} as IProps): IProps {
+        props.events = {
+            blur: (e: NodeEvent<HTMLElement>) => this.onBlur(e),
+            input: (e: NodeEvent<HTMLElement>) => this.onInput(e),
         };
         const onSubmit = this.submit.bind(this);
-        this.props.onSubmit = (e: NodeEvent<HTMLButtonElement>) => onSubmit(e);
+        props.onSubmit = (e: NodeEvent<HTMLElement>) => onSubmit(e);
+        return props;
     }
 
-    protected onBlur(e: NodeEvent<HTMLFormElement>) {
-        this.validate(e.target.value);
+    protected onBlur(e: NodeEvent<HTMLElement>) {
+        if (e.target instanceof HTMLInputElement)
+            this.validate(e.target.value);
     }
 
-    protected onInput(e: NodeEvent<HTMLFormElement>) {
+    protected onInput(e: NodeEvent<HTMLElement>) {
+        if (!(e.target instanceof HTMLInputElement))
+            return;
         const field = e.target;
         if (!field)
             return;
@@ -48,25 +55,22 @@ export default class DialogForm extends Block {
 
     public value(): Record<string, string> {
         const result = {
-            message: ""
+            message: this.props.message ? this.props.message : ""
         };
-        if (typeof (this.props.message) == "string") {
-            result.message = this.props.message;
-        }
         return result;
     }
 
-    public submit(e: NodeEvent<HTMLButtonElement>) {
-        console.log("Событие отправки формы");
+    public submit(e: NodeEvent<HTMLElement>) {
         if (!this.validate()) {
-            console.log("Форма заполнена с ошибками");
             e.preventDefault();
             e.stopPropagation();
         }
         else {
-            console.log("Ошибок нет, сообщение можно отправить");
+            if (typeof(this.props.onSendMessage) == "function") {
+                this.props.onSendMessage(this.value() as MessageFormData);
+                this.validate("");
+            }
         }
-        console.log(this.value());
     }
 
     protected render(): DocumentFragment {

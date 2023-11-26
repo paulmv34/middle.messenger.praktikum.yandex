@@ -1,4 +1,12 @@
 <div class="contacts-head">
-    {{{ ButtonIcon type="menu" page="profile"}}}
-    {{{ ContactsSearch search=search}}}
+    {{#ContextMenuContainer}}
+        {{{ButtonIcon type="menu"}}}
+        {{#ContextMenu position="bottom-right" ref="ContextMenu"}}
+            {{{ContextMenuItem type="profile" label="Профиль" page="/settings/"}}}
+            {{{ContextMenuItem type="new-chat" label="Создать чат" onClick=onModalShow}}}
+            {{{ContextMenuItem type="logout" label="Выйти" onClick=onLogoutClick}}}
+        {{/ContextMenu}}
+    {{/ContextMenuContainer}}
+    {{{ContactsSearch}}}
+    {{{ModalCreateChatForm ref='modalCreateChatForm'}}}
 </div>

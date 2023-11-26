@@ -1,16 +1,65 @@
-$cBlue: #298CFF;
-$cBlueHover: #226dc4;
-$cBlue10: rgba(41, 141, 255, 0.1);
-$cBlue15: rgba(41, 141, 255, 0.15);
-$cWhite: #FFFFFF;
-$cWhite80: rgba(255,255,255,0.8);
-$cGray: #999999;
-$cGray15: rgba(153, 153, 153, 0.15);
-$cDarkGray: #555555;
-$cBlack: #000000;
-$cBlack30: rgba(0, 0, 0, 0.30);
-$cGrayStroke: #DDDDDD;
-$cGrayHover: rgba(0, 0, 0, 0.10);
-$cLightenGrayBg: #F6F6F6;
-$cLightGrayBg: #F0F0F0;
-$cRed: #FF0000;
+:root {
+    --color-blue: #298CFF;
+    --color-blue-hover: #226dc4;
+    --color-blue-10: rgba(41, 141, 255, 0.1);
+    --color-blue-15: rgba(41, 141, 255, 0.15);
+    --color-context: #FFFFFF;
+    --color-white: #FFFFFF;
+    --color-constant-white: #FFFFFF;
+    --color-white-80: rgba(255,255,255,0.8);
+    --color-gray: #999999;
+    --color-gray-15: rgba(153, 153, 153, 0.15);
+    --color-dark-gray: #555555;
+    --color-black: #000000;
+    --color-black-30: rgba(0, 0, 0, 0.30);
+    --color-modal: rgba(0, 0, 0, 0.30);
+    --color-gray-stroke: #DDDDDD;
+    --color-gray-hover: rgba(0, 0, 0, 0.10);
+    --color-lighten-gray-bg: #F6F6F6;
+    --color-light-gray-bg: #F0F0F0;
+    --color-red: #FF0000;
+}
+
+$cBlue: var(--color-blue);
+$cBlueHover: var(--color-blue-hover);
+$cBlue10: var(--color-blue-10);
+$cBlue15: var(--color-blue-15);
+$cContext: var(--color-context);
+$cWhite: var(--color-white);
+$cConstantWhite: var(--color-constant-white);
+$cWhite80: var(--color-white-80);
+$cGray: var(--color-gray);
+$cGray15: var(--color-gray-15);
+$cDarkGray: var(--color-dark-gray);
+$cBlack: var(--color-black);
+$cBlack30: var(--color-black-30);
+$cModal: var(--color-modal);
+$cGrayStroke: var(--color-gray-stroke);
+$cGrayHover: var(--color-gray-hover);
+$cLightenGrayBg: var(--color-lighten-gray-bg);
+$cLightGrayBg: var(--color-light-gray-bg);
+$cRed: var(--color-red);
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        //--color-blue: #298CFF;
+        //--color-blue-hover: #226dc4;
+        //--color-blue-10: rgba(41, 141, 255, 0.1);
+        //--color-blue-15: rgba(41, 141, 255, 0.15);
+        color-scheme: dark;
+        --color-white: #555555;
+        --color-white-80: rgba(85,85,85,0.8);
+        --color-gray: #aaaaaa;
+        --color-gray-15: rgba(170, 170, 170, 0.20);
+        --color-dark-gray: #bbbbbb;
+        --color-black: #eeeeee;
+        --color-black-30: rgba(255, 255, 255, 0.30);
+        --color-modal: rgba(255, 255, 255, 0.30);
+        --color-gray-stroke: #888888;
+        //--color-gray-hover: rgba(0, 0, 0, 0.10);
+        --color-lighten-gray-bg: #404040;
+        --color-light-gray-bg: #404040;
+        --color-context: #303030;
+        --color-red: #FF0000;
+    }
+}

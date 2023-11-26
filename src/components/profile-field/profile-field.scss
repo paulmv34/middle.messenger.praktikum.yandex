@@ -35,6 +35,8 @@
         font-size: 16px;
         line-height: 1.25;
         font-weight: 400;
+        background: $cWhite;
+        color: $cBlack;
         text-align: right;
         &:focus {
             outline: none;
