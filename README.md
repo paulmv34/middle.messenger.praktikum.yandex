@@ -44,8 +44,8 @@
 - `npm run build` — сборка проекта
 - `npm run eslint` — запуск линтера ESLint
 - `npm run stylelint` — запуск линтера stylelint
-- `npm run prepare` - прекоммит хуки
-- `npm run test` - запуск unit тестов
+- `npm run prepare` — прекоммит хуки
+- `npm run test` — запуск unit тестов
 
 ## Стенд
 

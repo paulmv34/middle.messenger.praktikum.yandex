@@ -18,7 +18,7 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "esModuleInterop": true,
-    "baseUrl": "./",
+    "baseUrl": "./"
   },
   "include": ["src"],
   "exclude": ["src/**/*/*.test.ts"],
