@@ -2,10 +2,10 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "moduleResolution": "Bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -17,10 +17,13 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "./",
   },
   "include": ["src"],
+  "exclude": ["src/**/*/*.test.ts"],
   "ts-node": {
-    "esm": true
+    "esm": true,
+    "files": true
   }
 }

@@ -8,10 +8,9 @@ import ModalUserAvatarForm from "../../components/modal-user-avatar-form/modal-u
 import {cloneDeep} from "../../utils/cloneDeep";
 
 interface IProps extends Props  {
-    title: string,
-    caption: string,
-    back: string,
-    avatar: {src: string, username: string},
+    title?: string,
+    caption?: string,
+    back?: string,
     emailField?: IField<ValueString>,
     loginField?: IField<ValueString>,
     displayNameField?: IField<ValueString>,
@@ -24,7 +23,7 @@ interface IProps extends Props  {
     onClick?: (e: NodeEvent<HTMLElement>) => void,
     onLogoutClick?: (e: NodeEvent<HTMLElement>) => void,
     onModalShow?: () => void,
-    user: User,
+    user?: User,
 }
 
 interface IRefs extends RefType {
