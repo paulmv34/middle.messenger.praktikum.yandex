@@ -67,9 +67,6 @@ export default class ModalRemoveUserForm extends Block<IProps, IRefs> {
     }
 
     public search(data: UserSearch | null) {
-        // нет адекватной ручки для поиска по логину, есть только поиск по ФИО, но изначальный макет намекает на поиск по логину, а в ТЗ ни слова...
-        // раз уж добавили по логину, то и удалим по логину, в рамках обучения сойдет
-        // теперь представим, что далее используется ручка для поиска по логину среди пользователей чата...
         if (data && data.login) {
             searchUsersInChat(this.props.chatId, {limit: 99}).then((usersInChat) => {
                 const storeStateUser = appStore.getState().user;
